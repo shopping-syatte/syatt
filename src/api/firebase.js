@@ -38,6 +38,7 @@ export function onUserSatedChange(callback) {
   });
 }
 
+
 function adminUser(user) {
   // 2.사용자가 admin 에 등록이 되어 있는가
   // 3.{...user, isAdmin: true/false}

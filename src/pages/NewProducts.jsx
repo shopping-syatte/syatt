@@ -1,33 +1,37 @@
 import { useState } from 'react';
 import Button from '../components/ui/Button.jsx';
 import { uploadImage } from '../api/uploader.js';
-import { addNewProduct } from '../api/firebase.js';
+import useProducts from '../hooks/useProducts.jsx';
 
 export default function NewProducts() {
   const [product, setProduct] = useState({});
   const [file, setFile] = useState();
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
+  const {addProduct} = useProducts();
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsUploading(true);
     uploadImage(file) // 크라우디너리 업로드와 url 획득
-      .then( url => {
-        addNewProduct(product,url) // 파이어베이스 추가
-          .then(() => {
-            setSuccess('성공적으로 제품이 추가되었습니다.')
-            setTimeout(() => setSuccess(null), 4000)
-          })
+      .then(url => {
+        addProduct.mutate({product, url},{
+          onSuccess: () => {
+            setSuccess('성공적으로 제품이 추가되었습니다.');
+            setTimeout(() => setSuccess(null), 4000);
+          }
+        });
       })
-      .finally(()=>setIsUploading(false))
+      .finally(() => setIsUploading(false));
   };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'file') {
       setFile(files && files[0]); // 왜 첫번째를 지정 해야 하나
-      console.log(files[0])
+      console.log(files[0]);
       return;
     }
     setProduct((product) => ({ ...product, [name]: value }));
@@ -49,7 +53,7 @@ export default function NewProducts() {
         <input
           type='text'
           name={'title'}
-          value={ product.title ?? '' }
+          value={product.title ?? ''}
           placeholder={'상품명을 입력 하세요'}
           required={true}
           onChange={handleChange}
@@ -57,7 +61,7 @@ export default function NewProducts() {
         <input
           type='number'
           name={'price'}
-          value={ product.price ?? '' }
+          value={product.price ?? ''}
           placeholder={'제품 가격'}
           required={true}
           onChange={handleChange}
@@ -65,7 +69,7 @@ export default function NewProducts() {
         <input
           type='text'
           name={'category'}
-          value={ product.category ?? '' }
+          value={product.category ?? ''}
           placeholder={'카테코리'}
           required={true}
           onChange={handleChange}
@@ -73,7 +77,7 @@ export default function NewProducts() {
         <input
           type='text'
           name={'description'}
-          value={ product.description ?? '' }
+          value={product.description ?? ''}
           placeholder={'제품설명'}
           required={true}
           onChange={handleChange}
@@ -81,13 +85,13 @@ export default function NewProducts() {
         <input
           type='text'
           name={'options'}
-          value={ product.options ?? '' }
+          value={product.options ?? ''}
           placeholder={'옵션(콤마(,)로 구분)'}
           required={true}
           onChange={handleChange}
         />
-        <Button text={isUploading ? '업로드중 ..' :'제품등록하기'}
-          disabled={isUploading}
+        <Button text={isUploading ? '업로드중 ..' : '제품등록하기'}
+                disabled={isUploading}
         />
       </form>
     </section>
