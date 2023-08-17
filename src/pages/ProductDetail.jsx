@@ -15,7 +15,7 @@ export default function ProductDetail() {
   const {addOrUpdateItem} = useCart();
   const handleClick = () => {
     const product
-      = {id, image, title, price, options: selected, quantity: 1};
+      = {id, image, title, price, option:selected, quantity: 1};
     addOrUpdateItem.mutate(product, {
       onSuccess: ()=> {
         setSuccess("장바구니에 추가 되었습니다.")
@@ -28,8 +28,6 @@ export default function ProductDetail() {
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
-
-
   return (
     <>
       <p className={'mx-12 mt-4 text-gray-700'}>{category}</p>
