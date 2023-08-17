@@ -16,7 +16,7 @@ export default function Navbar() {
                 <div>
                     <Link to={'/'} className="flex items-center gap-2 text-[#ff0000]">
                         <FiShoppingBag className={'text-2xl font-bold'}/>
-                        <p className={'text-2xl text-bold'}>Shoppy</p>
+                        <p className={'text-2xl text-bold'}>Syatte Fauxpainting School</p>
                     </Link>
                 </div>
                 <div className="flex justify-between items-center gap-4">

@@ -2,7 +2,7 @@ import { useAuthContext } from '../context/AuthContext.jsx';
 import { Navigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-export default function ProtectedRoute({children , requireAdmin}) {
+export default function ProtectedRouter({children , requireAdmin}) {
   const {user} = useAuthContext()
 
   if( !user || (requireAdmin && !user.isAdmin )) {
