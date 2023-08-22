@@ -7,6 +7,9 @@ import NewProducts from './pages/NewProducts.jsx';
 import Cart from './pages/Cart.jsx';
 import ProtectedRoute from './pages/ProtectedRoute.jsx';
 import NotFound from './pages/NotFound.jsx';
+import { CheckoutPage } from './components/Checkout.jsx';
+import { SuccessPage } from './components/Success.jsx';
+import { FailPage } from './components/Fail.jsx';
 
 function App() {
   return (
@@ -19,12 +22,20 @@ function App() {
             <Cart />
           </ProtectedRoute>
         } />
+        <Route path='/lectures' element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        } />
         <Route path='/products/new' element={
           <ProtectedRoute requireAdmin='true'>
             <NewProducts />
           </ProtectedRoute>
         } />
         <Route path='/products/:id' element={<ProductDetail />} />
+        <Route path='/payment' element={<CheckoutPage />} />
+        <Route path='/success' element={<SuccessPage />} />
+        <Route path='/fail' element={<FailPage />} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>

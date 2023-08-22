@@ -60,9 +60,12 @@ export async function addNewProduct(product, image) {
     id,
     price: parseInt(product.price),
     image,
+    category: product.category,
     options: product.options.split(','),
+    vimeoId: product.vimeoId,
   });
 }
+
 
 export async function getProducts() {
   return get(ref(database, 'products'))
@@ -70,7 +73,7 @@ export async function getProducts() {
         if (snapshot.exists()) {
           return Object.values(snapshot.val());
         }
-        return []
+        return [];
       },
     );
 }
@@ -80,13 +83,31 @@ export async function getCart(userId) {
     .then(snapshot => {
       const items = snapshot.val() || {};
       return Object.values(items);
-    })
+    });
 }
 
 export async function addOrUpdateToCart(userId, product) {
-  return set(ref(database,`carts/${userId}/${product.id}`), product);
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
 }
 
 export async function removeFromCart(userId, productId) {
-  return remove(ref(database,`carts/${userId}/${productId}`));
+  return remove(ref(database, `carts/${userId}/${productId}`));
+}
+
+
+export async function getPayments(userId) {
+  return get(ref(database, `payments/${userId}`))
+    .then(snapshot => {
+      const items = snapshot.val() || {};
+      return Object.values(items);
+    });
+}
+
+export async function addOrUpdateToPayment(userId, product) {
+  console.log(product.id);
+  return set(ref(database, `payments/${userId}/${product.id}`), product);
+}
+
+export async function removeFromPayment(userId, productId) {
+  return remove(ref(database, `payments/${userId}/${productId}`));
 }
