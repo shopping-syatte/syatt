@@ -8,7 +8,8 @@ export function SuccessPage() {
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
 
-
+  // const statDate = 현재 날짜
+  // const endDate = 7일후 날짜
 
   // 결재 후 카트에 저장된 상품을 payment db로 옮기는 작업
   const handleClick = async () => {
