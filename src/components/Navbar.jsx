@@ -23,6 +23,9 @@ export default function Navbar() {
                     <Link to={'/products'}>
                         <p>Products</p>
                     </Link>
+                    {user && <Link to={'/class'}>
+                        <p>나의 강의실</p>
+                    </Link>}
                     {user && <Link to={'/carts'}>
                        <CartStatus />
                     </Link>}
