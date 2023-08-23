@@ -1,23 +1,30 @@
-import { useNavigate, } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useCart from '../hooks/useCart.jsx';
 
 export function SuccessPage() {
-  // const [searchParams] = useSearchParams();
-
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
+  // 강의 종료 날짜 설정
+  const DATECHECK = 7
 
-  // const statDate = 현재 날짜
-  // const endDate = 7일후 날짜
 
-  // 결재 후 카트에 저장된 상품을 payment db로 옮기는 작업
   const handleClick = async () => {
+    // 결재 후 카트에 저장된 상품을 payment db로 옮기는 작업
+    // 시작 날짜와 강의 종료 날짜를 설정한다.
+    // 파이어베이스엔 날짜 데이터가 바로 들어가지 않아 스티링으로 변환
+
+    const currentDate = new Date();
+    const endDate = new Date();
+    endDate.setDate(currentDate.getDate() + DATECHECK); // 7일 뒤 강의 종료
+
     products.map(product => {
       addOrUpdatePayment.mutate({
-        productId: product.id,
-        // startDate: startDate,
-        // endDate: endDate
+        id: product.id,
+        vimeoId: product.vimeoId,
+        startDate: String(currentDate),
+        endDate: String(endDate),
       });
       removeItem.mutate(product.id, {
         onSuccess: () => {
@@ -25,7 +32,7 @@ export function SuccessPage() {
         },
       });
     });
-    navigate('/carts'); // 이후 나의 강의장으로 이동 시킴
+    navigate('/carts');
   };
 
   if (isLoading) {
@@ -36,7 +43,7 @@ export function SuccessPage() {
 
   return (
     <>
-      {/*<div>
+      <div>
         <h1>결제 성공</h1>
         <div>{`주문 아이디: ${searchParams.get('orderId')}`}</div>
         <div className={'text-[20px]'}>
@@ -44,7 +51,7 @@ export function SuccessPage() {
             searchParams.get('amount'),
           ).toLocaleString()}원`}
         </div>
-      </div>*/}
+      </div>
       <div>
         <button
           onClick={handleClick}
@@ -54,3 +61,9 @@ export function SuccessPage() {
     </>
   );
 }
+
+//작업해야할것 : 디비 정리해서 payment로 넘기는 db작업
+//나의 강의실 작업 - 강의보기
+//관리자페이지: n일 시청기간 설정 - 나의 강의실 안보이기, 수정,삭제 리스트 보기
+//퍼블리싱
+//회원 가입, 인증

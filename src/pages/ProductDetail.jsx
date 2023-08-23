@@ -7,7 +7,7 @@ export default function ProductDetail() {
   const {
     state: {
       // eslint-disable-next-line no-unused-vars
-      product: { id, image, title, description, price, category, detailImage },
+      product: { id, image, title, description, price, category,detailImage,vimeoId },
     },
   } = useLocation();
   const [success, setSuccess] = useState();
@@ -18,7 +18,7 @@ export default function ProductDetail() {
 
   const handleClick = () => {
     const product
-      = { id, image, title, price, quantity: 1 };
+      = { id, image, title, price, vimeoId, category, quantity: 1 };
     addOrUpdateItem.mutate(product, {
       onSuccess: () => {
         setSuccess('장바구니에 추가 되었습니다.');
@@ -37,7 +37,7 @@ export default function ProductDetail() {
     <>
       <p className={'mx-12 mt-4 text-gray-700'}>{category}</p>
       <section className={'flex flex-col md:flex-row p-4'}>
-        {/*<img className={'w-[600] h-[400px] px-7 basis-7/12'}
+        {/*<img className={'w-[600]  px-7 basis-7/12'}
              src={image} alt={title} />*/}
         <img className={'w-24 md:w-48 rounded-lg'}
              src={image} alt={title} />
