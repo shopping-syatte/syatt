@@ -8,7 +8,6 @@ export function SuccessPage() {
   const navigate = useNavigate();
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
-
   // 강의 종료 날짜 설정
   const DATECHECK = 1;
 
