@@ -11,34 +11,52 @@ import { CheckoutPage } from './components/Checkout.jsx';
 import { SuccessPage } from './components/Success.jsx';
 import { FailPage } from './components/Fail.jsx';
 import Class from './pages/Class.jsx';
+import ClassViewer from './pages/ClassViewer.jsx';
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path='/' element={<Home />} />
-        <Route path='/products' element={<AllProducts />} />
-        <Route path='/carts' element={
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
-        } />
-        <Route path='/class' element={
-          <ProtectedRoute>
-            <Class />
-          </ProtectedRoute>
-        } />
-        <Route path='/products/new' element={
-          <ProtectedRoute requireAdmin='true'>
-            <NewProducts />
-          </ProtectedRoute>
-        } />
-        <Route path='/products/:id' element={<ProductDetail />} />
-        <Route path='/payment' element={<CheckoutPage />} />
-        <Route path='/success' element={<SuccessPage />} />
-        <Route path='/fail' element={<FailPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<AllProducts />} />
+        <Route
+          path="/carts"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/class"
+          element={
+            <ProtectedRoute>
+              <Class />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/classview/:vimeoId"
+          element={
+            <ProtectedRoute>
+              <ClassViewer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/products/new"
+          element={
+            <ProtectedRoute requireAdmin="true">
+              <NewProducts />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/payment" element={<CheckoutPage />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/fail" element={<FailPage />} />
       </Route>
-      <Route path='*' element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
