@@ -30,7 +30,7 @@ export function logout() {
   signOut(auth).catch(console.error);
 }
 
-export function onUserSatedChange(callback) {
+export async function onUserSatedChange(callback) {
   return onAuthStateChanged(auth, async (user) => {
     // 1.사용자가 잇으면 (로그인한 경우)
     const updateUser = user ? await adminUser(user) : null;
@@ -38,11 +38,10 @@ export function onUserSatedChange(callback) {
   });
 }
 
-
-function adminUser(user) {
+async function adminUser(user) {
   // 2.사용자가 admin 에 등록이 되어 있는가
   // 3.{...user, isAdmin: true/false}
-  return get(ref(database, 'admins'))
+  return await get(ref(database, 'admins'))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const admins = snapshot.val();
@@ -53,11 +52,13 @@ function adminUser(user) {
     });
 }
 
+// 새로운 제품 입력
 export async function addNewProduct(product, image) {
   const id = uuid();
-  return set(ref(database, `products/${id}`), {
+  return await set(ref(database, `products/${id}`), {
     ...product,
     id,
+    title: product.title,
     price: parseInt(product.price),
     image,
     detailImage: product.detailImage,
@@ -67,9 +68,9 @@ export async function addNewProduct(product, image) {
   });
 }
 
-
+// 제품 리스트
 export async function getProducts() {
-  return get(ref(database, 'products'))
+  return await get(ref(database, 'products'))
     .then((snapshot) => {
         if (snapshot.exists()) {
           return Object.values(snapshot.val());
@@ -79,6 +80,7 @@ export async function getProducts() {
     );
 }
 
+// cart API
 export async function getCart(userId) {
   return await get(ref(database, `carts/${userId}`))
     .then(snapshot => {
@@ -86,16 +88,15 @@ export async function getCart(userId) {
       return Object.values(items);
     });
 }
-
 export async function addOrUpdateToCart(userId, product) {
-  return set(ref(database, `carts/${userId}/${product.id}`), product);
+  return await set(ref(database, `carts/${userId}/${product.id}`), product);
 }
-
 export async function removeFromCart(userId, productId) {
-  return remove(ref(database, `carts/${userId}/${productId}`));
+  return await remove(ref(database, `carts/${userId}/${productId}`));
 }
 
 
+// 강의 내역 API
 export async function getPayment(userId) {
   return await get(ref(database, `payments/${userId}`))
     .then(snapshot => {
@@ -109,5 +110,24 @@ export async function addOrUpdateToPayment(userId, product) {
 }
 
 export async function removeFromPayment(userId, productId) {
+  return await remove(ref(database, `payments/${userId}/${productId}`));
+}
+
+
+// 구매 내역 API
+export async function getOrderList(userId) {
+  return await get(ref(database, `orderLists/${userId}`))
+    .then(snapshot => {
+      const items = snapshot.val() || {};
+      // console.log(items);
+      return Object.values(items);
+    });
+}
+
+export async function addOrUpdateToOrderList(userId, product) {
+  return await set(ref(database, `orderLists/${userId}/${product.id}`), product);
+}
+
+export async function removeFromOrderList(userId, productId) {
   return await remove(ref(database, `payments/${userId}/${productId}`));
 }

@@ -8,6 +8,7 @@ export default function UsePayment() {
   const paymentQuery =
     useQuery(['payment', uid || ''], () => getPayment(uid),
       {
+        staleTime: 1000 * 60,
         enabled: !!uid,
       })
 
@@ -25,6 +26,8 @@ export default function UsePayment() {
       },
     },
   );
+
+
 
   return { paymentQuery, addOrUpdatePayment, removePayment };
 

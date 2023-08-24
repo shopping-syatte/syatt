@@ -8,8 +8,9 @@ export function SuccessPage() {
   const navigate = useNavigate();
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
+
   // 강의 종료 날짜 설정
-  const DATECHECK = 1
+  const DATECHECK = 1;
 
 
   const handleClick = async () => {
@@ -30,6 +31,8 @@ export function SuccessPage() {
         vimeoId: product.vimeoId,
         startDate: dayjs(currentDate).format('YYYY-MM-DD'),
         endDate: dayjs(endDate).format('YYYY-MM-DD'),
+        videoStart:"",
+        videoEnd:""
       });
       removeItem.mutate(product.id, {
         onSuccess: () => {
