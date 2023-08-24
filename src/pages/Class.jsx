@@ -5,7 +5,6 @@ import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 
 export default function Class() {
-  const navigate = useNavigate();
   const {
     paymentQuery: { isLoading, isError, data: payment },
     removePayment,
@@ -20,13 +19,6 @@ export default function Class() {
     return <div>Loading...</div>;
   } else if (isError) {
     console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
-  }
-
-  // 날짜 체크 부분
-  // 수강종료일 조건을 체크하고 else 시청스타트 체크해서 시작되었으면  시청종료일 조건부 체크해서
-  // 시청 또는 구매내역으로 데이터 입력하고 기존 페이먼트에서 삭제한다.
-  function handleClick(index) {
-    navigate(`/classview/${payment[index].vimeoId}`);
   }
 
   payment.forEach((item) => {
