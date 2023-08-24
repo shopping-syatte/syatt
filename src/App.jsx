@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound.jsx';
 import { CheckoutPage } from './components/Checkout.jsx';
 import { SuccessPage } from './components/Success.jsx';
 import { FailPage } from './components/Fail.jsx';
+import Class from './pages/Class.jsx';
 
 function App() {
   return (
@@ -22,9 +23,9 @@ function App() {
             <Cart />
           </ProtectedRoute>
         } />
-        <Route path='/lectures' element={
+        <Route path='/class' element={
           <ProtectedRoute>
-            <Cart />
+            <Class />
           </ProtectedRoute>
         } />
         <Route path='/products/new' element={

@@ -1,6 +1,8 @@
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useCart from '../hooks/useCart.jsx';
+import dayjs from 'dayjs';
+
 
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
@@ -8,10 +10,11 @@ export function SuccessPage() {
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
   // 강의 종료 날짜 설정
-  const DATECHECK = 7
+  const DATECHECK = 1
 
 
   const handleClick = async () => {
+
     // 결재 후 카트에 저장된 상품을 payment db로 옮기는 작업
     // 시작 날짜와 강의 종료 날짜를 설정한다.
     // 파이어베이스엔 날짜 데이터가 바로 들어가지 않아 스티링으로 변환
@@ -23,11 +26,14 @@ export function SuccessPage() {
     products.map(product => {
       addOrUpdatePayment.mutate({
         id: product.id,
+        image: product.image,
+        title: product.title,
         vimeoId: product.vimeoId,
-        startDate: String(currentDate),
-        endDate: String(endDate),
 
+        startDate: dayjs(currentDate).format('YYYY-MM-DD'),
+        endDate: dayjs(endDate).format('YYYY-MM-DD'),
 
+  
       });
       removeItem.mutate(product.id, {
         onSuccess: () => {
@@ -36,7 +42,9 @@ export function SuccessPage() {
       });
     });
 
-    navigate('/carts'); // 이후 나의 강의장으로 이동 시킴
+    navigate('/class');
+
+
 
   };
 

@@ -10,8 +10,6 @@ export default function NewProducts() {
   const [success, setSuccess] = useState();
   const {addProduct} = useProducts();
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsUploading(true);
@@ -69,29 +67,27 @@ export default function NewProducts() {
           required={true}
           onChange={handleChange}
         />
-        {/*<input
+        <input
           type='text'
           name={'category'}
-          value={product.category ?? ''}
+          value={product.category?? ''}
           placeholder={'카테코리'}
           required={true}
           onChange={handleChange}
-        />*/}
-        <label
-          className={'text-blue font-bold mb-2'}
-          htmlFor='category'>카테고리</label>
-        <select
-          onChange={handleChange}
-          className={'border-1 solid border-blue-300 p-2 rounded-md'}
-          name={'category'}>
-          <option value={'강의'}>강의</option>
-          <option value={'상품'}>상품</option>
-        </select>
+        />
         <input
           type='text'
           name={'description'}
           value={product.description ?? ''}
           placeholder={'제품설명'}
+          required={true}
+          onChange={handleChange}
+        />
+        <input
+          type='text'
+          name={'section'}
+          value={product.section ?? ''}
+          placeholder={'과목'}
           required={true}
           onChange={handleChange}
         />
@@ -111,10 +107,12 @@ export default function NewProducts() {
           required={true}
           onChange={handleChange}
         />
+        {/*두번째 업로드 화일 업로드 시키기*/}
         <input
-          type='file'
-          accept={'image/*'}
-          name={'detailFile'}
+          type='text'
+          // accept={'image/*'}
+          placeholder={'상세페이지 url을 입력하세요'}
+          name={'detailImage'}
           required={true}
           onChange={handleChange}
         />
