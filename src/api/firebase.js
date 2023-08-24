@@ -103,6 +103,7 @@ export async function getPayments(userId) {
     });
 }
 
+
 export async function addOrUpdateToPayment(userId, product) {
   console.log(product.id);
   return set(ref(database, `payments/${userId}/${product.id}`), product);
