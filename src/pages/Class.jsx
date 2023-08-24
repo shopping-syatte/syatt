@@ -3,18 +3,8 @@ import dayjs from 'dayjs';
 
 export default function Class() {
 
-  const { paymentQuery: { isLoading, isError, data: payment },removePayment } = usePayment();
+  const { paymentQuery: { isLoading, isError, data: payment }, removePayment } = usePayment();
   const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준
-
-  payment.forEach((item) => {
-    if (item.checkDate === checkDate) {
-      removePayment.mutate(item.id,{
-        onSuccess: () => {
-          alert(`${item.title} 강의가 종료되었습니다.`);
-        }
-      });
-    }
-  })
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -25,6 +15,16 @@ export default function Class() {
   function handleClick () {
     console.log("영상보기");
   }
+
+  payment.map((item) => {
+    if (dayjs(item.endDate).format('YYYY-MM-DD') === checkDate ) {
+      removePayment.mutate(item.id,{
+        onSuccess: () => {
+          alert(`${item.title} 강의가 종료되었습니다.`);
+        }
+      });
+    }
+  })
 
   return (
     <>

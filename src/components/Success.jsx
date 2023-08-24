@@ -1,5 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useCart from '../hooks/useCart.jsx';
+import dayjs from 'dayjs';
+
 
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
@@ -26,8 +28,8 @@ export function SuccessPage() {
         image: product.image,
         title: product.title,
         vimeoId: product.vimeoId,
-        startDate: String(currentDate),
-        endDate: String(endDate),
+        startDate: dayjs(currentDate).format('YYYY-MM-DD'),
+        endDate: dayjs(endDate).format('YYYY-MM-DD'),
       });
       removeItem.mutate(product.id, {
         onSuccess: () => {

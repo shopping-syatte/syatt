@@ -111,6 +111,7 @@ export default function NewProducts() {
         <input
           type='text'
           // accept={'image/*'}
+          placeholder={'상세페이지 url을 입력하세요'}
           name={'detailImage'}
           required={true}
           onChange={handleChange}
