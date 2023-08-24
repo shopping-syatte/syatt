@@ -105,7 +105,11 @@ export async function getPayment(userId) {
 }
 
 export async function addOrUpdateToPayment(userId, product) {
+
   return await set(ref(database, `payments/${userId}/${product.id}`), product);
+
+
+
 }
 
 export async function removeFromPayment(userId, productId) {
