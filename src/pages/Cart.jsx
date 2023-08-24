@@ -3,13 +3,13 @@ import PriceCard from '../components/PriceCard.jsx';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { FaEquals } from 'react-icons/fa';
 import useCart from '../hooks/useCart.jsx';
-// import { useNavigate } from 'react-router-dom';
 import { CheckoutPage } from '../components/Checkout.jsx';
 import { useState } from 'react';
 
 const SHIPPING = 0;
+// 배송비 설정
+
 export default function MyCart() {
-  // const navigate = useNavigate();
 
   const [payView, setPayView] = useState(false);
   const { cartQuery: { isLoading, isError, data: products } } = useCart();

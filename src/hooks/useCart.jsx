@@ -1,11 +1,9 @@
 import { useAuthContext } from '../context/AuthContext.jsx'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  addOrUpdateToCart,
-  addOrUpdateToPayment,
+  addOrUpdateToCart, addOrUpdateToPayment,
   getCart,
   removeFromCart,
-  removeFromPayment,
 } from './../api/firebase.js';
 
 
@@ -32,20 +30,13 @@ export default function useCart() {
     }
   )
 
-
   const addOrUpdatePayment =
     useMutation((product) => addOrUpdateToPayment(uid, product), {
       onSuccess: () => {
-        queryClient.invalidateQueries(['cart', uid])
-      }
-    })
-  const removePayment = useMutation((id) => removeFromPayment(uid, id),
-    {
-      onSuccess: () => {
-        // queryClient.invalidateQueries(['cart', uid])
-      }
-    }
-  )
-  return {cartQuery, addOrUpdateItem, removeItem, addOrUpdatePayment, removePayment}
+        queryClient.invalidateQueries(['payment', uid]);
+      },
+    });
+
+  return {cartQuery, addOrUpdateItem, removeItem, addOrUpdatePayment}
 
 }

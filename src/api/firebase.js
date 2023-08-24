@@ -60,8 +60,9 @@ export async function addNewProduct(product, image) {
     id,
     price: parseInt(product.price),
     image,
+    detailImage: product.detailImage,
+    section: product.section,
     category: product.category,
-    options: product.options.split(','),
     vimeoId: product.vimeoId,
   });
 }
@@ -79,7 +80,7 @@ export async function getProducts() {
 }
 
 export async function getCart(userId) {
-  return get(ref(database, `carts/${userId}`))
+  return await get(ref(database, `carts/${userId}`))
     .then(snapshot => {
       const items = snapshot.val() || {};
       return Object.values(items);
@@ -95,8 +96,8 @@ export async function removeFromCart(userId, productId) {
 }
 
 
-export async function getPayments(userId) {
-  return get(ref(database, `payments/${userId}`))
+export async function getPayment(userId) {
+  return await get(ref(database, `payments/${userId}`))
     .then(snapshot => {
       const items = snapshot.val() || {};
       return Object.values(items);
@@ -105,9 +106,12 @@ export async function getPayments(userId) {
 
 export async function addOrUpdateToPayment(userId, product) {
 
-  return set(ref(database, `payments/${userId}/${product.id}`), product);
+  return await set(ref(database, `payments/${userId}/${product.id}`), product);
+
+
+
 }
 
 export async function removeFromPayment(userId, productId) {
-  return remove(ref(database, `payments/${userId}/${productId}`));
+  return await remove(ref(database, `payments/${userId}/${productId}`));
 }
