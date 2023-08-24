@@ -1,6 +1,8 @@
 import usePayment from '../hooks/usePayment';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router';
+import useOrderList from '../hooks/useOrderList.jsx';
+import ClassList from '../components/ClassList.jsx';
+import OrderList from '../components/OrderList.jsx';
 
 export default function Class() {
   const navigate = useNavigate();
@@ -8,7 +10,11 @@ export default function Class() {
     paymentQuery: { isLoading, isError, data: payment },
     removePayment,
   } = usePayment();
-  const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준
+  const {
+    orderListQuery: { data: orderList },
+    addOrUpdateOrderList,
+  } = useOrderList();
+  const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준 (오늘 날짜)
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -16,15 +22,21 @@ export default function Class() {
     console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
   }
 
+  // 날짜 체크 부분
+  // 수강종료일 조건을 체크하고 else 시청스타트 체크해서 시작되었으면  시청종료일 조건부 체크해서
+  // 시청 또는 구매내역으로 데이터 입력하고 기존 페이먼트에서 삭제한다.
   function handleClick(index) {
     navigate(`/classview/${payment[index].vimeoId}`);
   }
 
-  payment.map((item) => {
-    if (dayjs(item.endDate).format('YYYY-MM-DD') === checkDate) {
-      removePayment.mutate(item.id, {
+  payment.forEach((item) => {
+    const endDatePassed = dayjs(item.endDate).format('YYYY-MM-DD') <= checkDate;
+    const videoEndDatePassed =
+      item.videoStart && dayjs(item.videoEnd).format('YYYY-MM-DD') <= checkDate;
+    if (endDatePassed || videoEndDatePassed) {
+      addOrUpdateOrderList.mutate(item, {
         onSuccess: () => {
-          alert(`${item.title} 강의가 종료되었습니다.`);
+          removePayment.mutate(item.id);
         },
       });
     }
@@ -32,29 +44,19 @@ export default function Class() {
 
   return (
     <>
-      {payment.map((item, index) => (
-        <div key={index}>
-          <div className={'flex gap-6'}>
-            <div>
-              <img src={item.image} alt={item.title} />
-              <p className={'font-bold text-xl text-gray-700 text-center'}>
-                {item.title}
-              </p>
-            </div>
-            <div>
-              <p>{item.vimeoId}</p>
-              <p>수강 시작일 : {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
-              <p>수강 종료일 : {dayjs(item.endDate).format('YYYY-MM-DD')}</p>
-              <button
-                onClick={() => handleClick(index)}
-                className={'btn btn-primary'}
-              >
-                강의보기
-              </button>
-            </div>
+      {payment &&
+        payment.map((item, index) => (
+          <div key={index}>
+            <ClassList item={item} />
           </div>
-        </div>
-      ))}
+        ))}
+      <p className={'text-center text-3xl font-bold'}>수강내역</p>
+      {orderList &&
+        orderList.map((item, index) => (
+          <div key={index}>
+            <OrderList item={item} />
+          </div>
+        ))}
     </>
   );
 }

@@ -37,7 +37,6 @@ export default function NewProducts() {
     setProduct((product) => ({ ...product, [name]: value }));
   };
 
-
   return (
     <section className={'w-full text-center'}>
       {success && <p className={'my-2'}>✅{success}</p>}
