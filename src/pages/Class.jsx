@@ -18,24 +18,26 @@ export default function Class() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    payment && payment.forEach((item) => {
-      const endDatePassed = dayjs(item.endDate).format('YYYY-MM-DD') <= checkDate;
-      const videoEndDatePassed = item.videoStart && item.videoEnd <= checkDate;
-      if (endDatePassed || videoEndDatePassed) {
-        addOrUpdateOrderList.mutate(item, {
-          onSuccess: () => {
-            console.log('orderList 입력');
-            removePayment.mutate(item.id,{
-              onSuccess: () => {
-                console.log('payment 삭제');
-              },
-            });
-          },
-        });
-      }
-    });
+    payment &&
+      payment.forEach((item) => {
+        const endDatePassed =
+          dayjs(item.endDate).format('YYYY-MM-DD') <= checkDate;
+        const videoEndDatePassed =
+          item.videoStart && item.videoEnd <= checkDate;
+        if (endDatePassed || videoEndDatePassed) {
+          addOrUpdateOrderList.mutate(item, {
+            onSuccess: () => {
+              console.log('orderList 입력');
+              removePayment.mutate(item.id, {
+                onSuccess: () => {
+                  console.log('payment 삭제');
+                },
+              });
+            },
+          });
+        }
+      });
   }, []);
-
 
   if (isLoading) {
     return <div>Loading...</div>;
