@@ -6,10 +6,10 @@ import AdminSide from '../components/admin/AdminSide.jsx';
 const queryClient = new QueryClient();
 export default function AdminLayout() {
   return (
-    <div className='container block mx-auto w-[90%]'>
+    <div className="flex w-full">
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          < AdminSide/>
+          <AdminSide />
           <Outlet />
         </AuthContextProvider>
       </QueryClientProvider>

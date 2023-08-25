@@ -1,8 +1,6 @@
 // import { useAuthContext } from '../context/AuthContext.jsx';
-import AdminSide from "../components/admin/AdminSide"
 
-export default function Admin () {
-
+export default function Admin() {
   // const { user } = useAuthContext();
 
   // if(user && !user.Admin){
@@ -13,9 +11,9 @@ export default function Admin () {
   //   location.replace('/')
   // }
 
-  return(
+  return (
     <section>
-      <AdminSide/>
+      <div>어드민페이지 기본</div>
     </section>
-  )
+  );
 }

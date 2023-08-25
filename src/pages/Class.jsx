@@ -1,10 +1,41 @@
 import usePayment from '../hooks/usePayment';
 import dayjs from 'dayjs';
+import useOrderList from '../hooks/useOrderList.jsx';
+import ClassList from '../components/ClassList.jsx';
+import OrderList from '../components/OrderList.jsx';
+import { useEffect } from 'react';
 
 export default function Class() {
+  const {
+    paymentQuery: { isLoading, isError, data: payment },
+    removePayment,
+  } = usePayment();
+  const {
+    orderListQuery: { data: orderList },
+    addOrUpdateOrderList,
+  } = useOrderList();
+  const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준 (오늘 날짜)
 
-  const { paymentQuery: { isLoading, isError, data: payment }, removePayment } = usePayment();
-  const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    payment && payment.forEach((item) => {
+      const endDatePassed = dayjs(item.endDate).format('YYYY-MM-DD') <= checkDate;
+      const videoEndDatePassed = item.videoStart && item.videoEnd <= checkDate;
+      if (endDatePassed || videoEndDatePassed) {
+        addOrUpdateOrderList.mutate(item, {
+          onSuccess: () => {
+            console.log('orderList 입력');
+            removePayment.mutate(item.id,{
+              onSuccess: () => {
+                console.log('payment 삭제');
+              },
+            });
+          },
+        });
+      }
+    });
+  }, []);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -12,40 +43,21 @@ export default function Class() {
     console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
   }
 
-  function handleClick () {
-    console.log("영상보기");
-  }
-
-  payment.map((item) => {
-    if (dayjs(item.endDate).format('YYYY-MM-DD') === checkDate ) {
-      removePayment.mutate(item.id,{
-        onSuccess: () => {
-          alert(`${item.title} 강의가 종료되었습니다.`);
-        }
-      });
-    }
-  })
-
   return (
     <>
-      { payment.map((item, index) => (
-        <div key={index}>
-          <div className={'flex gap-6'}>
-            <div>
-              <img src={item.image} alt={item.title} />
-              <p className={'font-bold text-xl text-gray-700 text-center'}>{item.title}</p>
-            </div>
-            <div>
-              <p>{item.vimeoId}</p>
-              <p>수강 시작일 : {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
-              <p>수강 종료일 : {dayjs(item.endDate).format('YYYY-MM-DD')}</p>
-              <button
-                onClick={handleClick}
-                className={'btn btn-primary'}>강의보기</button>
-            </div>
+      {payment &&
+        payment.map((item, index) => (
+          <div key={index}>
+            <ClassList item={item} />
           </div>
-        </div>
-      ))}
+        ))}
+      <p className={'text-center text-3xl font-bold'}>수강내역</p>
+      {orderList &&
+        orderList.map((item, index) => (
+          <div key={index}>
+            <OrderList item={item} />
+          </div>
+        ))}
     </>
   );
 }

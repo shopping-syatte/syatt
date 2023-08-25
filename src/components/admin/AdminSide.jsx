@@ -1,31 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export default function AdminSide(){
-  
+export default function AdminSide() {
   const sideBar = [];
 
-  const list = ['DASHBOARD' , '상품관리' , '유저관리' , '판매내역'];
+  const list = ['DASHBOARD', '상품관리', '유저관리', '판매내역'];
 
-  //const listLink = ['/productmanage' , '/productmanage', '/productmanage', '/productmanage']
+  const listLink = ['/admin', '/productmanage', '/user', '/salelist'];
 
-  for(let i=0; i<list.length; i++){
-    if(i === 0){
+  for (let i = 0; i < list.length; i++) {
+    {
       sideBar.push(
-        <div className="py-6 text-xl font-bold">
+        <Link to={listLink[i]} className="py-6 text-xl font-bold" key={list[i]}>
           {list[i]}
-        </div>
-      )
+        </Link>
+      );
     }
   }
 
-  return(
-    <div className="w-1/6 h-[600px] flex flex-col justify-between">
-      <div className="flex flex-col">
-        {sideBar}
-      </div>
+  return (
+    <div className="w-1/6 h-[600px] flex flex-col justify-between border-2">
+      <div className="flex flex-col">{sideBar}</div>
       <Link to={'/'} className="py-6 text-xl font-bold">
         HOME
       </Link>
     </div>
-  )
+  );
 }

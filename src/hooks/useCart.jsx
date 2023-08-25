@@ -13,6 +13,7 @@ export default function useCart() {
   const cartQuery =
     useQuery(['cart', uid || ''], () => getCart(uid),
       {
+        staleTime: 1000 * 60 ,
         enabled: !!uid,
       })
 
