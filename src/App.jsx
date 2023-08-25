@@ -11,7 +11,6 @@ import { CheckoutPage } from './components/Checkout.jsx';
 import { SuccessPage } from './components/Success.jsx';
 import { FailPage } from './components/Fail.jsx';
 import Class from './pages/Class.jsx';
-import ClassViewer from './pages/ClassViewer.jsx';
 import AdminLayout from './pages/AdminLayout.jsx';
 import AdminProducts from './pages/AdminProducts.jsx';
 import Admin from './pages/Admin.jsx';
@@ -37,14 +36,6 @@ function App() {
           element={
             <ProtectedRoute>
               <Class />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/classview/:vimeoId"
-          element={
-            <ProtectedRoute>
-              <ClassViewer />
             </ProtectedRoute>
           }
         />
