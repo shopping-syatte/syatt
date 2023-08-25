@@ -11,11 +11,12 @@ import { CheckoutPage } from './components/Checkout.jsx';
 import { SuccessPage } from './components/Success.jsx';
 import { FailPage } from './components/Fail.jsx';
 import Class from './pages/Class.jsx';
+import Admin from './pages/Admin.jsx';
 
 function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
+    <>
+      <Routes element={<Layout />}>
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<AllProducts />} />
         <Route path='/carts' element={
@@ -37,9 +38,10 @@ function App() {
         <Route path='/payment' element={<CheckoutPage />} />
         <Route path='/success' element={<SuccessPage />} />
         <Route path='/fail' element={<FailPage />} />
-      </Route>
+      </Routes>
+      <Route path='/admin' element={<Admin/>} />
       <Route path='*' element={<NotFound />} />
-    </Routes>
+    </>
   );
 }
 
