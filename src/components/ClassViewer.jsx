@@ -42,11 +42,8 @@ export default function ClassViewer({ data, setIsOpenModal }) {
   }
   return (
     <>
-      <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-70 text-center">
-        <div
-          method="dialog"
-          className="bg-white rounded w-4/5 h-4/5 flex justify-center items-center relative"
-        >
+      <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center text-center">
+        <div className="bg-white rounded w-4/5 h-4/5 flex justify-center items-center relative z-50">
           <h3 className="font-bold text-xl absolute left-2 top-2 m-10">
             {data.title}
           </h3>
@@ -64,6 +61,13 @@ export default function ClassViewer({ data, setIsOpenModal }) {
             onStart={handleVideoStart}
           />
         </div>
+        <div
+          className="fixed w-full h-full bg-black bg-opacity-30 backdrop-blur-sm top-0 left-0 z-40"
+          onClick={() => {
+            setIsOpenModal(false);
+            console.log('클릭');
+          }}
+        ></div>
       </div>
     </>
   );

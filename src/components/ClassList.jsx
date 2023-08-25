@@ -13,7 +13,6 @@ export default function ClassList({ item }) {
     setIsOpenModal(true);
   }
   const data = item; // es-Lint error 때문에 data로 넘겨 줌
-  console.log(data);
   return (
     <>
       <div className={'flex gap-6'}>
