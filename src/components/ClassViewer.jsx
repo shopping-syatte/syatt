@@ -15,12 +15,6 @@ export default function ClassViewer({ data, setIsOpenModal }) {
     addOrUpdatePayment,
   } = usePayment();
 
-  // const [videoId, setVideoId] = useState('');
-
-  // useEffect(() => {
-  //   setVideoId(vimeoId);
-  // }, []);
-
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (isError) {
@@ -43,10 +37,12 @@ export default function ClassViewer({ data, setIsOpenModal }) {
   return (
     <>
       <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center text-center">
-        <div className="bg-white rounded w-4/5 h-4/5 flex justify-center items-center relative z-50">
-          <h3 className="font-bold text-xl absolute left-2 top-2 m-10">
-            {data.title}
-          </h3>
+        <div className="bg-white rounded w-4/5 h-4/5 flex flex-col justify-center items-center relative z-50">
+          <div className="w-full">
+            <h3 className="font-bold text-xl mt-5 ml-10 text-left">
+              {data.title}
+            </h3>
+          </div>
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             onClick={() => setIsOpenModal(false)}
