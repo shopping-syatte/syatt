@@ -1,11 +1,14 @@
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
 import usePayment from '../hooks/usePayment';
 import dayjs from 'dayjs';
+import PropTypes from 'prop-types';
 
-export default function ClassViewer() {
-  // 비디오 아이디를 가져오기 위한 useParams
-  const { vimeoId } = useParams();
+ClassViewer.propTypes = {
+  data: PropTypes.object.isRequired,
+  setIsOpenModal: PropTypes.func.isRequired,
+};
+
+export default function ClassViewer({ data, setIsOpenModal }) {
   // 강의 정보를 뿌려주기 위한 구매 정보
   const {
     paymentQuery: { isLoading, isError, data: products },
@@ -26,7 +29,9 @@ export default function ClassViewer() {
 
   // firebase db payment에 videoStart, videoEnd 업데이트
   function handleVideoStart() {
-    const product = products.find((product) => product.vimeoId === vimeoId);
+    const product = products.find(
+      (product) => product.vimeoId === data.vimeoId
+    );
     if (product.isWatched) return;
     addOrUpdatePayment.mutate({
       ...product,
@@ -34,18 +39,32 @@ export default function ClassViewer() {
       videoEnd: dayjs().add(1, 'day').format('YYYY-MM-DD'),
       isWatched: true,
     });
-    // console.log('videoStart');
   }
   return (
     <>
-      <div>ClassViewer</div>
-      <ReactPlayer
-        url={`https://player.vimeo.com/video/${vimeoId}`}
-        width="1280px"
-        height="1024px"
-        controls
-        onStart={handleVideoStart}
-      />
+      <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-70 text-center">
+        <div
+          method="dialog"
+          className="bg-white rounded w-4/5 h-4/5 flex justify-center items-center relative"
+        >
+          <h3 className="font-bold text-xl absolute left-2 top-2 m-10">
+            {data.title}
+          </h3>
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => setIsOpenModal(false)}
+          >
+            ✕
+          </button>
+          <ReactPlayer
+            url={`https://player.vimeo.com/video/${data.vimeoId}`}
+            width="100%"
+            height="100%"
+            controls
+            onStart={handleVideoStart}
+          />
+        </div>
+      </div>
     </>
   );
 }
