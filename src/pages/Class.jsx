@@ -28,7 +28,8 @@ useEffect(() => {
       if (item.videoEnd <= checkDate) {
         addRemove(item);
       }
-    } else if (item.endDate <= checkDate) {
+    }
+    if (item.endDate <= checkDate) {
       addRemove(item);
     }
   });
