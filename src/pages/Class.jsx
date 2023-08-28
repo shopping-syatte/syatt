@@ -16,50 +16,48 @@ export default function Class() {
   } = useOrderList();
   const checkDate = dayjs().format('YYYY-MM-DD'); // 날짜 체크를 위한 기준 (오늘 날짜)
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    payment &&
-      payment.forEach((item) => {
-        const endDatePassed =
-          dayjs(item.endDate).format('YYYY-MM-DD') <= checkDate;
-        const videoEndDatePassed =
-          item.videoStart && item.videoEnd <= checkDate;
-        if (endDatePassed || videoEndDatePassed) {
-          addOrUpdateOrderList.mutate(item, {
-            onSuccess: () => {
-              console.log('orderList 입력');
-              removePayment.mutate(item.id, {
-                onSuccess: () => {
-                  console.log('payment 삭제');
-                },
-              });
-            },
-          });
-        }
-      });
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  } else if (isError) {
-    console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
+  async function addRemove(item) {
+    await addOrUpdateOrderList.mutate(item);
+    await removePayment.mutate(item.id);
   }
 
-  return (
-    <>
-      {payment &&
-        payment.map((item, index) => (
-          <div key={index}>
-            <ClassList item={item} />
-          </div>
-        ))}
-      <p className={'text-center text-3xl font-bold'}>수강내역</p>
-      {orderList &&
-        orderList.map((item, index) => (
-          <div key={index}>
-            <OrderList item={item} />
-          </div>
-        ))}
-    </>
-  );
+useEffect(() => {
+  payment &&
+  payment.forEach((item) => {
+    if (item.isWatched) {
+      if (item.videoEnd <= checkDate) {
+        addRemove(item);
+      }
+    }
+    if (item.endDate <= checkDate) {
+      addRemove(item);
+    }
+  });
+}, [payment, orderList]);
+
+
+if (isLoading) {
+  return <div>Loading...</div>;
+} else if (isError) {
+  console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
 }
+
+return (
+  <>
+    {payment &&
+      payment.map((item, index) => (
+        <div key={index}>
+          <ClassList item={item} />
+        </div>
+      ))}
+    <p className={'text-center text-3xl font-bold'}>수강내역</p>
+    {orderList &&
+      orderList.map((item, index) => (
+        <div key={index}>
+          <OrderList item={item} />
+        </div>
+      ))}
+  </>
+);
+}
+
