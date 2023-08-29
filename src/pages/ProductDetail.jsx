@@ -8,7 +8,7 @@ export default function ProductDetail() {
     state: {
       // eslint-disable-next-line no-unused-vars
 
-      product: { id, image, title, description, price, category,detailImage,vimeoId },
+      product: { id, image, title, description, price,section, category,detailImage,vimeoId },
 
     },
   } = useLocation();
@@ -21,7 +21,7 @@ export default function ProductDetail() {
   const handleClick = () => {
     const product
 
-      = { id, image, title, price, vimeoId, category, quantity: 1 };
+      = { id, image, title, price, vimeoId, category, section, quantity: 1 };
 
     addOrUpdateItem.mutate(product, {
       onSuccess: () => {
