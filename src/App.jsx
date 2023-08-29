@@ -51,12 +51,12 @@ function App() {
         <Route path="/payment" element={<CheckoutPage />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/fail" element={<FailPage />} />
-      </Route>
-      <Route element={<AdminLayout />}>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/productmanage" element={<AdminProducts />} />
-        <Route path="/user" element={<AdminUser />} />
-        <Route path="/salelist" element={<AdminSales />} />
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/productmanage" element={<AdminProducts />} />
+          <Route path="/user" element={<AdminUser />} />
+          <Route path="/salelist" element={<AdminSales />} />
+        </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
