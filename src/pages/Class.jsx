@@ -90,8 +90,8 @@ export default function Class() {
           ))}
       </div>
       <div className={'divider mb-[40px]'} />
-      <div>
-        <p className={'text-center text-3xl font-bold'}>수강내역</p>
+      <p className={'text-center text-3xl font-bold'}>수강내역</p>
+      <div className={'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[16px]'}>
         {orderList &&
           orderList.map((item, index) => (
             <div key={index}>

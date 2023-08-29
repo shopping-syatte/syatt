@@ -22,8 +22,7 @@ export default function ClassList({ item }) {
           <p className={'font-bold text-[20px] text-fontColor text-left'}>
             #{data.title}
           </p>
-          <p>수강 기간: {data.startDate} ~ {data.videoEnd}</p>
-          {/*<P>{data.section}</P>*/}
+          <p className={'text-[12px] text-fontColor'}>수강기간:{data.startDate} ~ {data.videoEnd}</p>
           {isOpenModal && (
             <ClassViewer data={data} setIsOpenModal={setIsOpenModal} />
           )}
