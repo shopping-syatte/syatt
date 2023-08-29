@@ -7,15 +7,17 @@ export default {
         sans: ["Noto Sans", "sans-serif"],
       },
       colors: {
-        brand: "#F96162",
+        brand: '#F96162',
+        gold: '#CFA461',
+        black: '665944',
         background: "#CFA461",
         fontColor: "#665944"
       },
-      backgroundImage:{
+      backgroundImage: {
         banner: `url('/images/banner.jpg')`,
-      }
+        logo: `url('/images/logo.png')`,
+      },
     },
   },
   plugins: [require('daisyui')],
-}
-
+};
