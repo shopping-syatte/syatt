@@ -32,7 +32,7 @@ export default function ProductDetail() {
       },
     });
   };
- /* const handleSelect = (e) => {
+/* const handleSelect = (e) => {
     setSelected(e.target.value);
   };*/
 
@@ -44,9 +44,9 @@ export default function ProductDetail() {
 
         {/*<img className={'w-[600]  px-7 basis-7/12'}
 
-             src={image} alt={title} />*/}
+            src={image} alt={title} />*/}
         <img className={'w-24 md:w-48 rounded-lg'}
-             src={image} alt={title} />
+            src={image} alt={title} />
         <div className={'w-full basis-5/12 flex flex-col p-4'}>
           <h2 className={'text-3xl font-bold py-2'}>{title}</h2>
           <p className={'text-2xl font-bold py-2 border-b border-gray-400'}>W{price}</p>
