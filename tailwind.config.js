@@ -7,11 +7,12 @@ export default {
         sans: ["Noto Sans", "sans-serif"],
       },
       colors: {
-        brand: '#F96162',
+        brand: "#F96162",
+        background: "#CFA461",
+        fontColor: "#665944",
         gold: '#CFA461',
         black: '665944',
-        background: "#CFA461",
-        fontColor: "#665944"
+
       },
       backgroundImage: {
         banner: `url('/images/banner.jpg')`,
