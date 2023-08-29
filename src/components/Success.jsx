@@ -27,6 +27,7 @@ export function SuccessPage() {
         id: product.id,
         image: product.image,
         title: product.title,
+        section: product.section,
         vimeoId: product.vimeoId,
         startDate: dayjs(currentDate).format('YYYY-MM-DD'),
         endDate: dayjs(endDate).format('YYYY-MM-DD'),
