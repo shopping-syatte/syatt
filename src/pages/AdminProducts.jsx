@@ -1,7 +1,11 @@
+import AdminProductHead from '../components/admin/AdminProductHead';
+import AdminProductList from '../components/admin/AdminProductList';
+
 export default function AdminProducts() {
   return (
     <section>
-      <div>상품관리</div>
+      <AdminProductHead />
+      <AdminProductList />
     </section>
   );
 }

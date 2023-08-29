@@ -18,7 +18,7 @@ export default function AdminSide() {
   }
 
   return (
-    <div className="w-1/6 h-[600px] flex flex-col justify-between">
+    <div className="w-1/6 h-[600px] flex flex-col justify-between border-2">
       <div className="flex flex-col">{sideBar}</div>
       <Link to={'/'} className="py-6 text-xl font-bold">
         HOME
