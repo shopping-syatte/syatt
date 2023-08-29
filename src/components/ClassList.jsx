@@ -13,14 +13,14 @@ export default function ClassList({ item }) {
 
   return (
     <>
-      <div className={'flex justify-content'}>
+      <div className={'flex justify-content mb-[40px]'}>
         <div>
           <img
             onClick={handleClick}
             className={'w-[285px] h-[162px] rounded-[14.7px]'}
             src={data.image} alt={data.title} />
-          <p className={'font-bold text-xl text-gray-700 text-left'}>
-            {data.title}
+          <p className={'font-bold text-[20px] text-fontColor text-left'}>
+            #{data.title}
           </p>
           <p>수강 기간: {data.startDate} ~ {data.videoEnd}</p>
           {/*<P>{data.section}</P>*/}

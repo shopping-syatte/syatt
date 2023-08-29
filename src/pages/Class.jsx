@@ -39,7 +39,7 @@ export default function Class() {
   }, [payment]);
 
   useEffect(() => {
-    if ( choice === 'all') {
+    if (choice === 'all') {
       setFilter(payment);
     } else {
       const temp =
@@ -47,7 +47,7 @@ export default function Class() {
         payment.filter((item) => item.section === choice);
       setFilter(temp);
     }
-  }, [choice,payment]);
+  }, [choice, payment]);
 
   const categoryList = payment && payment.map((item) => item.section);
 
@@ -59,24 +59,27 @@ export default function Class() {
 
   return (
     <div className={'flex flex-col justify-content items-center'}>
-      <div className={'mt-[46px] border-bottom-1px '}>
-        <p className={'text-[40px]'}>마이 페이지</p>
+      <div className={'w-full h-[170] '}>
+        <p className={'text-[40px] pt-[46px] pb-[70px] text-center'}>마이 페이지</p>
       </div>
-      <div className={'w-full h-[262px] bg-background mt-[70px] mb-[50px]'}>
-      </div>
-      <div className={'flex justify-between items-center'}>
-        <p className={'text-[30px] font-bold'}> 강의 목록</p>
-        <div
-          className={'flex justify-end items-center'}>
-          <p onClick={() => setChoice('all')}>강의전체</p>
-          {categoryList.map((item, index) => (
-            <p
-              onClick={() => setChoice(item)}
-              key={index}>{item}</p>
-          ))}
-        </div>
+      <div className={'w-full h-[262px] bg-background  mb-[50px]'}>
+        배너
       </div>
 
+      <div className={'w-full'}>
+        <ul className={'flex justify-start items-center'}>
+          <li
+            className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+            onClick={() => setChoice('all')}>강의전체</li>
+          {categoryList.map((item, index) => (
+            <li
+              className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+              onClick={() => setChoice(item)}
+              key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+      <div className={'divider mb-[40px]'} />
       <div className={'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[16px]'}>
         {filter &&
           filter.map((item, index) => (
@@ -86,6 +89,7 @@ export default function Class() {
             </div>
           ))}
       </div>
+      <div className={'divider mb-[40px]'} />
       <div>
         <p className={'text-center text-3xl font-bold'}>수강내역</p>
         {orderList &&

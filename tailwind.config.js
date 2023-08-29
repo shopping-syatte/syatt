@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Noto Sans", "sans-serif"],
       },
       colors: {
         brand: "#F96162",
         background: "#CFA461",
+        fontColor: "#665944"
       },
       backgroundImage:{
         banner: `url('/images/banner.jpg')`,
