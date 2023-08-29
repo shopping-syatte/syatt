@@ -36,7 +36,7 @@ export default function Class() {
         addRemove(item);
       }
     });
-  }, [payment, orderList]);
+  }, [payment]);
 
   useEffect(() => {
     if ( choice === 'all') {
