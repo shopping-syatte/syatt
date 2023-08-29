@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 export default function Layout() {
   return (
-    <div className="container block mx-auto w-[90%]">
+    <div className="container block mx-auto w-[90%] overflow-hidden">
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
           <Navbar />
