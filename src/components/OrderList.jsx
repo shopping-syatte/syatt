@@ -6,7 +6,7 @@ export default function OrderList({ item }) {
     <div  className={'flex justify-center items-center'}>
       <div>
         <img
-          className={'w-[300px]'}
+          className={'w-[200px]'}
           src={data.image} alt={data.name} />
       </div>
       <div className={'text-2xl ml-[30px]'}>

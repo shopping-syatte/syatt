@@ -2,11 +2,13 @@ import ReactPlayer from 'react-player';
 import usePayment from '../hooks/usePayment';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
+import { ENDDAY } from '../Constant/Constants.js';
 
 ClassViewer.propTypes = {
   data: PropTypes.object.isRequired,
   setIsOpenModal: PropTypes.func.isRequired,
 };
+
 
 export default function ClassViewer({ data, setIsOpenModal }) {
   // 강의 정보를 뿌려주기 위한 구매 정보
@@ -30,7 +32,7 @@ export default function ClassViewer({ data, setIsOpenModal }) {
     addOrUpdatePayment.mutate({
       ...product,
       videoStart: dayjs().format('YYYY-MM-DD'),
-      videoEnd: dayjs().add(1, 'day').format('YYYY-MM-DD'),
+      videoEnd: dayjs().add( ENDDAY, 'day').format('YYYY-MM-DD'),
       isWatched: true,
     });
   }
