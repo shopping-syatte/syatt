@@ -24,16 +24,16 @@ export default function Navbar() {
             className="dropdown-content z-[1] menu p-2 bg-base-100 rounded-box w-52 drop-shadow-lg"
           >
             <li className="border-b-2">
-              <Link to={'/products/기초포페인팅'}>기초 포페인팅</Link>
+              <Link to={'/products/category/기초포페인팅'}>기초 포페인팅</Link>
             </li>
             <li className="border-b-2">
-              <Link to={'/products/메탈페인트'}>메탈 페인트</Link>
+              <Link to={'/products/category/메탈페인트'}>메탈 페인트</Link>
             </li>
             <li className="border-b-2">
-              <Link to={'/products/메탈플라스터'}>메탈 플라스터</Link>
+              <Link to={'/products/category/메탈플라스터'}>메탈 플라스터</Link>
             </li>
             <li>
-              <Link to={'/products/메탈이펙트'}>메탈 이펙트</Link>
+              <Link to={'/products/category/메탈이펙트'}>메탈 이펙트</Link>
             </li>
           </ul>
         </div>
