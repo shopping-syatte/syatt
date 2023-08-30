@@ -8,7 +8,6 @@ export default {
       },
       colors: {
         brand: '#F96162',
-        background: '#CFA461',
         fontColor: '#665944',
         gold: '#CFA461',
       },

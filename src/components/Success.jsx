@@ -1,16 +1,13 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useCart from '../hooks/useCart.jsx';
 import dayjs from 'dayjs';
-
+import { DATECHECK } from '../Constant/Constants.js';
 
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { cartQuery: { isLoading, isError, data: products }, addOrUpdatePayment, removeItem }
     = useCart();
-  // 강의 종료 날짜 설정
-  const DATECHECK = 1;
-
 
   const handleClick = async () => {
 
@@ -20,7 +17,7 @@ export function SuccessPage() {
 
     const currentDate = new Date();
     const endDate = new Date();
-    endDate.setDate(currentDate.getDate() + DATECHECK); // 7일 뒤 강의 종료
+    endDate.setDate(currentDate.getDate() + DATECHECK); // DATECHECH 후에 강의 종료
 
     products.map(product => {
       addOrUpdatePayment.mutate({

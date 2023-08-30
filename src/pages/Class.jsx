@@ -69,11 +69,13 @@ export default function Class() {
       <div className={'w-full'}>
         <ul className={'flex justify-start items-center'}>
           <li
-            className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+            className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
+              'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
             onClick={() => setChoice('all')}>강의전체</li>
           {categoryList.map((item, index) => (
             <li
-              className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+              className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
+                'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
               onClick={() => setChoice(item)}
               key={index}>{item}</li>
           ))}
