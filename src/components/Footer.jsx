@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="flex flex-wrap justify-around items-center p-2 h-[300px] bg-[#fcfcfc] relative before:content-[''] before:absolute before:top-0 before:bottom-0 before:w-[9999px] before:bg-inherit before:z-[-1]">
+        <div className="flex flex-wrap justify-around items-center p-2 h-[300px] bg-[#fcfcfc]">
           <div className="w-2/6">
             <span className="text-[34px] font-bold text-fontColor">
               Painting <br /> Association

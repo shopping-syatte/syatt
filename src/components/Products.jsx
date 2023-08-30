@@ -1,12 +1,7 @@
 import ProductCard from './ProductCard.jsx';
 import useProducts from '../hooks/useProducts.jsx';
-import PropTypes from 'prop-types';
 
-Products.propTypes = {
-  category: PropTypes.string,
-};
-
-export default function Products({ category }) {
+export default function Products() {
   const {
     productsQuery: { isLoading, error, data: products },
   } = useProducts();

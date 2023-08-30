@@ -9,7 +9,7 @@ export default function Navbar() {
   const { user, login, logout } = useAuthContext();
 
   return (
-    <header className="h-[100px] flex justify-center items-center w-full relative before:content-[''] before:absolute before:top-0 before:bottom-0 before:w-[9999px] before:border-b before:border-gray-200 before:z-[-1]">
+    <header className="h-[100px] flex justify-center items-center w-full">
       <div className="w-full flex justify-between items-center p-2">
         <div className="dropdown">
           <label
