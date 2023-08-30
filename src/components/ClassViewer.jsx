@@ -9,7 +9,6 @@ ClassViewer.propTypes = {
   setIsOpenModal: PropTypes.func.isRequired,
 };
 
-
 export default function ClassViewer({ data, setIsOpenModal }) {
   // 강의 정보를 뿌려주기 위한 구매 정보
   const {
@@ -32,18 +31,20 @@ export default function ClassViewer({ data, setIsOpenModal }) {
     addOrUpdatePayment.mutate({
       ...product,
       videoStart: dayjs().format('YYYY-MM-DD'),
-      videoEnd: dayjs().add( ENDDAY, 'day').format('YYYY-MM-DD'),
+      videoEnd: dayjs().add(ENDDAY, 'day').format('YYYY-MM-DD'),
       isWatched: true,
     });
   }
   return (
     <>
       <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center text-center">
-        <div className="bg-white rounded w-4/5 h-4/5 flex flex-col justify-center items-center relative z-50">
+        <div className="bg-white rounded-lg w-3/5 h-4/5 flex flex-col justify-center items-center relative z-50 p-8 gap-2">
           <div className="w-full flex justify-center items-center flex-col gap-4">
-            <h3 className="font-bold text-xl mt-5">{data.title}</h3>
+            <h3 className="font-bold text-3xl mt-5">{data.title}</h3>
             <div className="w-[40px] h-[4px] bg-gold" />
-            <p className="text-sm text-fontColor">{data.description}</p>
+            <p className="w-72 text-fontColor whitespace-break-spaces text-xs">
+              {data.description}
+            </p>
           </div>
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -58,6 +59,9 @@ export default function ClassViewer({ data, setIsOpenModal }) {
             controls
             onStart={handleVideoStart}
           />
+          <button className="btn w-80 h-8 btn-ghost border-2 bg-gold text-white text-lg hover:bg-white hover:text-gold hover:border-gold">
+            닫기
+          </button>
         </div>
         <div
           className="fixed w-full h-full bg-black bg-opacity-30 backdrop-blur-sm top-0 left-0 z-40"

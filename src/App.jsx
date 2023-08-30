@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout.jsx';
+import SectionLayout from './pages/SectionLayout.jsx';
 import Home from './pages/Home.jsx';
 import CategoryProducts from './pages/CategoryProducts.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
@@ -21,11 +22,13 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/products/category/:category"
-          element={<CategoryProducts />}
-        />
+        <Route element={<SectionLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/products/category/:category"
+            element={<CategoryProducts />}
+          />
+        </Route>
         <Route
           path="/carts"
           element={
