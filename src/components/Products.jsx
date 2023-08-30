@@ -4,6 +4,8 @@ import useProducts from '../hooks/useProducts.jsx';
 export default function Products() {
   const { productsQuery : {isLoading, error, data: products}} = useProducts();
 
+ // 과목에 맞게 뿌려 준다
+
   return (
     <>
       {isLoading && <p>Loading...</p>}

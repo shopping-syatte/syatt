@@ -62,7 +62,7 @@ export default function Class() {
       <div className={'w-full h-[170] '}>
         <p className={'text-[40px] pt-[46px] pb-[70px] text-center'}>마이 페이지</p>
       </div>
-      <div className={'w-full h-[262px] bg-background  mb-[50px]'}>
+      <div className={'w-full h-[262px] bg-gold mb-[50px]'}>
         배너
       </div>
 
