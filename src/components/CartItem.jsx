@@ -25,7 +25,6 @@ export default function CartItem(
       <div className={'flex-1 flex justify-between ml-4'}>
         <div className={'basis-3/5'}>
           <p className={'text-lg'}>{title}</p>
-          {/*<p className={'text-xl font-bold text-blue-700'}>{options}</p>*/}
           <p className={'text-2xl text-brand font-bold'}>{price.toLocaleString('ko-KR', {
             style: 'currency',
             currency: 'KRW' })}

@@ -46,12 +46,6 @@ export default function ClassViewer({ data, setIsOpenModal }) {
               {data.description}
             </p>
           </div>
-          <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={() => setIsOpenModal(false)}
-          >
-            ✕
-          </button>
           <ReactPlayer
             url={`https://player.vimeo.com/video/${data.vimeoId}`}
             width="100%"
@@ -59,17 +53,13 @@ export default function ClassViewer({ data, setIsOpenModal }) {
             controls
             onStart={handleVideoStart}
           />
-          <button className="btn w-80 h-8 btn-ghost border-2 bg-gold text-white text-lg hover:bg-white hover:text-gold hover:border-gold">
+          <button
+            onClick={() => setIsOpenModal(false)}
+            className={"btn w-80 h-8 btn-ghost border-2 bg-gold text-white " +
+            "text-lg hover:bg-white hover:text-gold hover:border-gold"}>
             닫기
           </button>
         </div>
-        <div
-          className="fixed w-full h-full bg-black bg-opacity-30 backdrop-blur-sm top-0 left-0 z-40"
-          onClick={() => {
-            setIsOpenModal(false);
-            console.log('클릭');
-          }}
-        ></div>
       </div>
     </>
   );

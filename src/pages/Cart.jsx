@@ -10,9 +10,7 @@ import { SHIPPING } from '../Constant/Constants.js';
 // 배송비 설정
 
 export default function MyCart() {
-
   const { cartQuery: { isLoading, isError, data: products } } = useCart();
-
   const totalPrice =
     products && products.reduce((prev, curr) =>
       prev + parseInt(curr.price) * curr.quantity, 0);
