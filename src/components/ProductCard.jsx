@@ -22,14 +22,19 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <li onClick={handleClick}
-      className={'rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105'}>
-      <img className={'w-full'} src={image} alt={title} />
-      <div className={'mt-2 px-2 text-lg flex justify-between items-center '}>
-        <h3 className={'truncate'}>{title}</h3>
-        <p>{`W${price}`}</p>
-      </div>
-    </li>
-  )
+    <div className="product-card" onClick={handleClick}>
+      <img className="w-96 h-56 rounded-lg" src={image} alt={title} />
+      <p className="text-xl font-bold"># {title}</p>
+      <p className="text-coffeeBrown text-sm font-noto-sans font-normal break-words">권장 강의는 협회에서 엄선한 강의를 추가하였습니다.</p>
+      <div className="flex">
+      <div className="text-yellow-600 font-semibold text-base font-inter bg-white rounded-lg border border-yellow-500 border-7">
+  강의 바로 담기
+</div>
+<div className="flex flex-grow justify-end items-center ml-3">
+  <span className="text-2xl font-semibold">200,000</span>
+  <span className="text-sm font-light mt-2">원</span>
+</div>
+</div>
+</div>
+  );
 }
-

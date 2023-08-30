@@ -8,7 +8,7 @@ export default function ProductDetail() {
     state: {
       // eslint-disable-next-line no-unused-vars
 
-      product: { id, image, title, description, price, category,detailImage,vimeoId },
+      product: { id, image, title, description, price,section, category,detailImage,vimeoId },
 
     },
   } = useLocation();
@@ -21,7 +21,7 @@ export default function ProductDetail() {
   const handleClick = () => {
     const product
 
-      = { id, image, title, price, vimeoId, category, quantity: 1 };
+      = { id, image, title, price, vimeoId, category, section, quantity: 1 };
 
     addOrUpdateItem.mutate(product, {
       onSuccess: () => {
@@ -32,7 +32,7 @@ export default function ProductDetail() {
       },
     });
   };
- /* const handleSelect = (e) => {
+/* const handleSelect = (e) => {
     setSelected(e.target.value);
   };*/
 
@@ -44,9 +44,9 @@ export default function ProductDetail() {
 
         {/*<img className={'w-[600]  px-7 basis-7/12'}
 
-             src={image} alt={title} />*/}
+            src={image} alt={title} />*/}
         <img className={'w-24 md:w-48 rounded-lg'}
-             src={image} alt={title} />
+            src={image} alt={title} />
         <div className={'w-full basis-5/12 flex flex-col p-4'}>
           <h2 className={'text-3xl font-bold py-2'}>{title}</h2>
           <p className={'text-2xl font-bold py-2 border-b border-gray-400'}>W{price}</p>
