@@ -1,6 +1,8 @@
 import ProductCard from './ProductCard.jsx';
 import useProducts from '../hooks/useProducts.jsx';
+
 import { categorySection } from '../Constant/Constants.js';
+
 
 
 export default function Products() {
