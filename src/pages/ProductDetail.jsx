@@ -10,10 +10,7 @@ export default function ProductDetail() {
       product: { id, image, title, description, price,section, category,detailImage,vimeoId },
     },
   } = useLocation();
-
   const [success, setSuccess] = useState();
-  // const [selected, setSelected] = useState(options && options[0]);
-
   const { addOrUpdateItem } = useCart();
 
   const handleClick = () => {
@@ -29,10 +26,6 @@ export default function ProductDetail() {
       },
     });
   };
-/* const handleSelect = (e) => {
-    setSelected(e.target.value);
-  };*/
-
 
   return (
     <>
@@ -49,17 +42,6 @@ export default function ProductDetail() {
             currency: 'KRW',
           })}</p>
 
-          {/* <div className={'flex items-center'}>
-            <label className={'text-brand font-bold'} htmlFor={'select'}>옵션</label>
-            <select
-              className={'p-2 m-4 flex-1 border-2 border-dashed border-brand outline-0'}
-              id={'select' }
-              onChange={handleSelect} value={selected}>
-              {options && options.map((option, index) => (
-                <option key={index}>{option}</option>
-              ))}
-            </select>
-          </div>*/}
           {success && <p className={'my-2'}>{success}</p>}
           <Button text={'장바구니에 추가'} onClick={handleClick} />
         </div>

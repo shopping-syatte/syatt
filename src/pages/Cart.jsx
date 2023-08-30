@@ -4,7 +4,6 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { FaEquals } from 'react-icons/fa';
 import useCart from '../hooks/useCart.jsx';
 import { CheckoutPage } from '../components/Checkout.jsx';
-import { useState } from 'react';
 
 const SHIPPING = 0;
 // 배송비 설정
