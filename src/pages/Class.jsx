@@ -4,7 +4,6 @@ import useOrderList from '../hooks/useOrderList.jsx';
 import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 import { useEffect, useState } from 'react';
-import { AiFillHome } from 'react-icons/ai';
 import { categorySection } from '../Constant/Constants.js';
 
 export default function Class() {
