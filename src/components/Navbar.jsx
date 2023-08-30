@@ -53,7 +53,7 @@ export default function Navbar() {
               <p>나의 강의실</p>
             </Link>
           )} */}
-          {user && !user.isAdmin && (
+          {user && (
             <Link to={'/carts'}>
               <CartStatus />
             </Link>
