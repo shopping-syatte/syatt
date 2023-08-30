@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import User from './User.jsx';
 import { useAuthContext } from '../context/AuthContext.jsx';
 import CartStatus from './CartStatus.jsx';
+import { categorySection } from '../Constant/Constants.js';
 
 export default function Navbar() {
   const { user, login, logout } = useAuthContext();
 
   return (
-    <header className="h-[100px] flex justify-center items-center w-full">
+    <header className="h-[100px] flex justify-center items-center w-full border-b">
       <div className="w-full flex justify-between items-center p-2">
         <div className="dropdown">
           <label
@@ -23,18 +24,13 @@ export default function Navbar() {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 bg-base-100 rounded-box w-52 drop-shadow-lg"
           >
-            <li className="border-b-2">
-              <Link to={'/products/category/기초포페인팅'}>기초 포페인팅</Link>
-            </li>
-            <li className="border-b-2">
-              <Link to={'/products/category/메탈페인트'}>메탈 페인트</Link>
-            </li>
-            <li className="border-b-2">
-              <Link to={'/products/category/메탈플라스터'}>메탈 플라스터</Link>
-            </li>
-            <li>
-              <Link to={'/products/category/메탈이펙트'}>메탈 이펙트</Link>
-            </li>
+            {categorySection.map((item, index) => {
+              return (
+                <li key={index} className="border-b last:border-0">
+                  <Link to={`/products/category/${item}`}>{item}</Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div>
