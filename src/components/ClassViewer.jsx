@@ -9,7 +9,6 @@ ClassViewer.propTypes = {
   setIsOpenModal: PropTypes.func.isRequired,
 };
 
-
 export default function ClassViewer({ data, setIsOpenModal }) {
   // 강의 정보를 뿌려주기 위한 구매 정보
   const {
