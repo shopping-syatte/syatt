@@ -1,23 +1,26 @@
 import ProductCard from './ProductCard.jsx';
 import useProducts from '../hooks/useProducts.jsx';
+import PropTypes from 'prop-types';
 
-export default function Products() {
-  const { productsQuery: { isLoading, error, data: products } } = useProducts();
-  const {category} = products
+Products.propTypes = {
+  category: PropTypes.string,
+};
 
-  console.log(category);
+export default function Products({ category }) {
+  const {
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts();
 
   return (
     <>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
-      {/*<div>
-        <p>{}</p>
-      </div>*/}
-      <ul className={'grid gird-cols-1 md:grid-cols-3 gap-4 p-4'}>
-        {products && products.map((product) => (
-          <ProductCard key={product.id} product={product} />))}
+      <ul className={'grid grid-cols-1 md:grid-cols-3 gap-4 p-4'}>
+        {products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </ul>
     </>
-  );
+  )
 }
