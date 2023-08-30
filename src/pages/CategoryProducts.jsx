@@ -13,8 +13,6 @@ export default function AllProducts() {
     const bNumber = parseInt(b.title.split('.')[0]);
     return aNumber - bNumber;
   })
-  
-  
 
   return (
     <>

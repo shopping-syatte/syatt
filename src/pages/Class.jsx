@@ -4,8 +4,11 @@ import useOrderList from '../hooks/useOrderList.jsx';
 import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 import { useEffect, useState } from 'react';
+import { AiFillHome } from 'react-icons/ai';
+import { categorySection } from '../Constant/Constants.js';
 
 export default function Class() {
+
   const [choice, setChoice] = useState('all');
   const [filter, setFilter] = useState('');
   const {
@@ -51,6 +54,7 @@ export default function Class() {
 
   const categoryList = payment && payment.map((item) => item.section);
 
+
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (isError) {
@@ -67,6 +71,23 @@ export default function Class() {
       </div>
 
       <div className={'w-full'}>
+        <div
+          className={
+            'w-full h-16 flex flex-row justify-start items-center gap-3 ml-2'
+          }
+        >
+          {categorySection.map((section, index) => (
+            <div
+              // className={`text-gold rounded-3xl text-sm font-bold p-2 cursor-pointer hover:border-gold hover:border ${
+              //   category === section ? 'bg-gold text-white' : 'bg-white'
+              // }`}
+              key={index}
+            >
+              #{section}
+            </div>
+          ))}
+        </div>
+
         <ul className={'flex justify-start items-center'}>
           <li
             className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
@@ -81,6 +102,9 @@ export default function Class() {
           ))}
         </ul>
       </div>
+
+
+
       <div className={'divider mb-[40px]'} />
       <div className={'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[16px]'}>
         {filter &&
