@@ -40,10 +40,10 @@ export default function ClassViewer({ data, setIsOpenModal }) {
     <>
       <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center text-center">
         <div className="bg-white rounded w-4/5 h-4/5 flex flex-col justify-center items-center relative z-50">
-          <div className="w-full">
-            <h3 className="font-bold text-xl mt-5 ml-10 text-left">
-              {data.title}
-            </h3>
+          <div className="w-full flex justify-center items-center flex-col gap-4">
+            <h3 className="font-bold text-xl mt-5">{data.title}</h3>
+            <div className="w-[40px] h-[4px] bg-gold" />
+            <p className="text-sm text-fontColor">{data.description}</p>
           </div>
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
