@@ -1,5 +1,6 @@
 import AdminProduct from './AdminProudct';
 import useProducts from '../../hooks/useProducts';
+import { useSelectedContext } from '../../context/SelectedContext';
 import { Pagination } from 'antd';
 import { useState } from 'react';
 
@@ -7,6 +8,7 @@ export default function AdminProductList() {
   const {
     productsQuery: { data: products },
   } = useProducts();
+  const { category, section } = useSelectedContext();
 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
@@ -14,9 +16,17 @@ export default function AdminProductList() {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products
-    ? products.slice(indexOfFirstProduct, indexOfLastProduct)
-    : [];
+  const filteredProducts = products
+  ? products.filter(
+      (product) =>
+        (category ? product.category === category : true) &&
+        (section ? product.section === section : true)
+    )
+  : [];
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
