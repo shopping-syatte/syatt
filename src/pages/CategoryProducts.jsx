@@ -20,9 +20,10 @@ export default function AllProducts() {
     <>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
-      <div className="w-full h-[170px] bg-[#FCFCFC] flex justify-center items-center shadow-md">
-        <span className='text-2xl border-gold text-fontColor'>{category}</span>
-      </div>
+    <div className="w-full h-[170px] bg-[#FCFCFC] flex flex-col justify-center items-center shadow-md">
+      <span className='text-2xl border-gold text-fontColor'>{category}</span>
+      <div className='text-3xl flex justify-center items-center text-fontColor'>_</div>
+    </div>
       {products && <SectionProducts products={filteredProducts}/>}
     </>
   );
