@@ -4,14 +4,12 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { FaEquals } from 'react-icons/fa';
 import useCart from '../hooks/useCart.jsx';
 import { CheckoutPage } from '../components/Checkout.jsx';
-import { useState } from 'react';
 
 const SHIPPING = 0;
 // 배송비 설정
 
 export default function MyCart() {
 
-  const [payView, setPayView] = useState(false);
   const { cartQuery: { isLoading, isError, data: products } } = useCart();
 
   const totalPrice =
@@ -25,10 +23,6 @@ export default function MyCart() {
   }
 
   const hasProducts = products && products.length > 0;
-
-  const handleClick = () =>{
-    setPayView(!payView);
-  }
 
   return (
     <section className={'p-8'}>
@@ -52,10 +46,9 @@ export default function MyCart() {
           </div>
           <div>
             <label
-              onClick={handleClick}
               className='btn btn-accent ml-6'>결재하기</label>
           </div>
-          <div className={`${payView ? 'block' : 'hidden' } `}>
+          <div >
             <CheckoutPage price={totalPrice + SHIPPING} />
           </div>
         </>}

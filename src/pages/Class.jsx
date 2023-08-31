@@ -62,18 +62,20 @@ export default function Class() {
       <div className={'w-full h-[170] '}>
         <p className={'text-[40px] pt-[46px] pb-[70px] text-center'}>마이 페이지</p>
       </div>
-      <div className={'w-full h-[262px] bg-background  mb-[50px]'}>
+      <div className={'w-full h-[262px] bg-gold mb-[50px]'}>
         배너
       </div>
 
       <div className={'w-full'}>
         <ul className={'flex justify-start items-center'}>
           <li
-            className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+            className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
+              'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
             onClick={() => setChoice('all')}>강의전체</li>
           {categoryList.map((item, index) => (
             <li
-              className={'border border-solid border-1 border-gray-300 rounded-[30px] p-1 hover:bg-background hover:text-white ml-[10px]'}
+              className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
+                'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
               onClick={() => setChoice(item)}
               key={index}>{item}</li>
           ))}
