@@ -1,11 +1,10 @@
-import { useEffect, useRef, } from 'react';
+import { useEffect, useRef } from 'react';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
+import { getTossKeys } from '../api/firebase.js';
 
 //후에 환경변수로 저장할 것
 const selector = '#payment-widget';
-const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
-const customerKey = 'YbX2HuSlsC9uVJW6NMRMj';
 
 // eslint-disable-next-line react/prop-types,no-unused-vars
 export function CheckoutPage({ price }) {
@@ -15,10 +14,14 @@ export function CheckoutPage({ price }) {
 
   useEffect(() => {
     (async () => {
+      const { clientKey, customerKey } = await getTossKeys().then((result) => {
+        console.log(result);
+        return result;
+      });
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         selector,
-        { value: price },
+        { value: price }
       );
       paymentWidgetRef.current = paymentWidget;
       paymentMethodsWidgetRef.current = paymentMethodsWidget;
@@ -32,7 +35,7 @@ export function CheckoutPage({ price }) {
     }
     paymentMethodsWidget.updateAmount(
       price,
-      paymentMethodsWidget.UPDATE_REASON.COUPON,
+      paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
 
@@ -45,8 +48,8 @@ export function CheckoutPage({ price }) {
         customerName: '김토스',
         customerEmail: 'customer123@gmail.com',
         successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`
-      })
+        failUrl: `${window.location.origin}/fail`,
+      });
     } catch (error) {
       console.error('결재 실패', error);
       // handle error
@@ -56,10 +59,10 @@ export function CheckoutPage({ price }) {
   return (
     <>
       <div>
-        <div id='payment-widget' />
-        <button
-          className={'btn btn-primary ml-6'}
-          onClick={handleClick}> 확 인
+        <div id="payment-widget" />
+        <button className={'btn btn-primary ml-6'} onClick={handleClick}>
+          {' '}
+          확 인
         </button>
       </div>
     </>

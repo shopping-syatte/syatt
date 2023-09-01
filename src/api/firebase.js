@@ -9,7 +9,6 @@ import {
 import { getDatabase, ref, set, get, remove } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
 
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -41,15 +40,14 @@ export async function onUserSatedChange(callback) {
 async function adminUser(user) {
   // 2.사용자가 admin 에 등록이 되어 있는가
   // 3.{...user, isAdmin: true/false}
-  return await get(ref(database, 'admins'))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const admins = snapshot.val();
-        const isAdmin = admins.includes(user.uid);
-        return { ...user, isAdmin };
-      }
-      return user;
-    });
+  return await get(ref(database, 'admins')).then((snapshot) => {
+    if (snapshot.exists()) {
+      const admins = snapshot.val();
+      const isAdmin = admins.includes(user.uid);
+      return { ...user, isAdmin };
+    }
+    return user;
+  });
 }
 
 // 새로운 제품 입력
@@ -70,23 +68,20 @@ export async function addNewProduct(product, image) {
 
 // 제품 리스트
 export async function getProducts() {
-  return await get(ref(database, 'products'))
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-          return Object.values(snapshot.val());
-        }
-        return [];
-      },
-    );
+  return await get(ref(database, 'products')).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
 }
 
 // cart API
 export async function getCart(userId) {
-  return await get(ref(database, `carts/${userId}`))
-    .then(snapshot => {
-      const items = snapshot.val() || {};
-      return Object.values(items);
-    });
+  return await get(ref(database, `carts/${userId}`)).then((snapshot) => {
+    const items = snapshot.val() || {};
+    return Object.values(items);
+  });
 }
 export async function addOrUpdateToCart(userId, product) {
   return await set(ref(database, `carts/${userId}/${product.id}`), product);
@@ -95,42 +90,36 @@ export async function removeFromCart(userId, productId) {
   return await remove(ref(database, `carts/${userId}/${productId}`));
 }
 
-
 // 강의 내역 API
 export async function getPayment(userId) {
-  return await get(ref(database, `payments/${userId}`))
-    .then(snapshot => {
-      const items = snapshot.val() || {};
-      return Object.values(items);
-    });
+  return await get(ref(database, `payments/${userId}`)).then((snapshot) => {
+    const items = snapshot.val() || {};
+    return Object.values(items);
+  });
 }
 
-
 export async function addOrUpdateToPayment(userId, product) {
-
   return await set(ref(database, `payments/${userId}/${product.id}`), product);
-
-
-
 }
 
 export async function removeFromPayment(userId, productId) {
   return await remove(ref(database, `payments/${userId}/${productId}`));
 }
 
-
 // 구매 내역 API
 export async function getOrderList(userId) {
-  return await get(ref(database, `orderLists/${userId}`))
-    .then(snapshot => {
-      const items = snapshot.val() || {};
-      // console.log(items);
-      return Object.values(items);
-    });
+  return await get(ref(database, `orderLists/${userId}`)).then((snapshot) => {
+    const items = snapshot.val() || {};
+    // console.log(items);
+    return Object.values(items);
+  });
 }
 
 export async function addOrUpdateToOrderList(userId, product) {
-  return await set(ref(database, `orderLists/${userId}/${product.id}`), product);
+  return await set(
+    ref(database, `orderLists/${userId}/${product.id}`),
+    product
+  );
 }
 
 export async function removeFromOrderList(userId, productId) {
