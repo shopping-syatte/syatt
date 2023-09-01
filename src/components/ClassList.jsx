@@ -17,7 +17,7 @@ export default function ClassList({ item }) {
         <div>
           <img
             onClick={handleClick}
-            className={'w-[285px] h-[162px] rounded-[14.7px]'}
+            className={'w-[285px] h-[162px] rounded-[14.7px] hover:cursor-pointer hover:scale-110'}
             src={data.image} alt={data.title} />
           <p className={'font-bold text-[20px] text-fontColor text-left'}>
             #{data.title}

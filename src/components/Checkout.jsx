@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 
 //후에 환경변수로 저장할 것
 const selector = '#payment-widget';
-const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
+const clientKey = 'test_ck_KNbdOvk5rk4Y1pqeq7v8n07xlzmj';
 const customerKey = 'YbX2HuSlsC9uVJW6NMRMj';
 
 // eslint-disable-next-line react/prop-types,no-unused-vars
@@ -22,6 +22,7 @@ export function CheckoutPage({ price }) {
       );
       paymentWidgetRef.current = paymentWidget;
       paymentMethodsWidgetRef.current = paymentMethodsWidget;
+      paymentWidget.renderAgreement("#agreement")
     })();
   }, []);
 
@@ -49,14 +50,17 @@ export function CheckoutPage({ price }) {
       })
     } catch (error) {
       console.error('결재 실패', error);
+      alert("결재가 취소되거나, 이용약관에 동의 해주세요")
       // handle error
     }
+
   };
 
   return (
     <>
       <div>
         <div id='payment-widget' />
+        <div id='agreement' />
         <button
           className={'btn btn-primary ml-6'}
           onClick={handleClick}> 확 인
