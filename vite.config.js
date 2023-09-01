@@ -7,15 +7,4 @@ export default defineConfig({
   alias: {
     '@': './src'
   },
-  server: {
-    port: 3000,
-    proxy: {
-      '/api': {
-        target: 'https://api.tosspayments.com/',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  }
 })
