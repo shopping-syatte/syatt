@@ -17,6 +17,8 @@ import AdminProducts from './pages/AdminProducts.jsx';
 import Admin from './pages/Admin.jsx';
 import AdminUser from './pages/AdminUser.jsx';
 import AdminSales from './pages/AdminSales.jsx';
+import AdminNewProduct from './pages/AdminNewProduct.jsx'
+import AdminProductEdit from './pages/AdminProductEdit.jsx';
 
 function App() {
   return (
@@ -57,11 +59,17 @@ function App() {
         <Route path="/payment" element={<CheckoutPage />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/fail" element={<FailPage />} />
-        <Route element={<AdminLayout />}>
+        <Route element={
+          <ProtectedRoute requireAdmin="true">
+            <AdminLayout />
+          </ProtectedRoute>
+        }>
           <Route path="/admin" element={<Admin />} />
           <Route path="/productmanage" element={<AdminProducts />} />
           <Route path="/user" element={<AdminUser />} />
           <Route path="/salelist" element={<AdminSales />} />
+          <Route path="/newproduct" element={<AdminNewProduct/>}/>
+          <Route path="/productEdit/:id" element={<AdminProductEdit/>}/>
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

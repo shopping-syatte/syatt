@@ -1,6 +1,7 @@
-import { Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons'
 import { useSelectedContext } from '../../context/SelectedContext';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { categorySection } from '../../Constant/Constants';
+import { Link } from 'react-router-dom';
 
 export default function AdminProductHead() {
   const { setCategory, setSection } = useSelectedContext();
@@ -15,86 +16,52 @@ export default function AdminProductHead() {
     '삭제',
   ];
 
-  const categoryMenu = [
-    {
-      label: (
-        <div>
-          온라인강의
-        </div>
-      ),
-      key: '온라인강의',
-    },
-    {
-      label: (
-        <div>
-          여성상의
-        </div>
-      ),
-      key: '여성상의',
-    }
-  ];
+  const categoryList = ['온라인강의', '여성 상의'];
 
-  const classificationMenu = [
-    {
-      label: (
-        <div>
-          기초포페인팅
-        </div>
-      ),
-      key: '기초포페인팅',
-    },
-    {
-      label: (
-        <div>
-          메탈플러스터
-        </div>
-      ),
-      key: '메탈플러스터',
-    },
-    {
-      label: (
-        <div>
-          메탈페인트
-        </div>
-      ),
-      key: '메탈페인트',
-    },
-    {
-      label: (
-        <div>
-          메탈이펙트
-        </div>
-      ),
-      key: '메탈이펙트',
-    }
-  ];
-
-  const classifyCategory = (e) => {
+  const classifyCategory = (e, item) => {
     e.preventDefault();
-    setCategory(e.key)
+    setCategory(item)
   }
 
-  const classifySection = (e) => {
+  const classifySection = (e, item) => {
     e.preventDefault();
-    setSection(e.key)
+    setSection(item)
   }
 
   return (
     <div className="flex text-center py-2">
       {headList.map((headItem) => (
-        <div className="w-32 cursor-pointer" key={headItem}>
+        <div className="w-32" key={headItem}>
           {headItem === '카테고리' ? (
-            <Dropdown menu={{categoryMenu}}>
-              <a onClick={classifyCategory}>
-                {headItem} <DownOutlined />
-              </a>
-            </Dropdown>
+            <div className='dropdown'>
+              <label tabIndex={0} className="flex items-center cursor-pointer">
+                {headItem}<IoMdArrowDropdown/>
+              </label>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40">
+                {categoryList.map((item, index)=>{
+                  return(
+                    <li key={index} onClick={(e) => classifyCategory(e, item)}>
+                      <Link>{item}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           ) : headItem === '분류' ? (
-            <Dropdown menu={{classificationMenu}}>
-              <a onClick={classifySection}>
-                {headItem} <DownOutlined />
-              </a>
-            </Dropdown>
+            <div className='dropdown'>
+              <label tabIndex={0} className="flex items-center cursor-pointer">
+                {headItem}<IoMdArrowDropdown/>
+              </label>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40">
+                {categorySection.map((item, index)=>{
+                  return(
+                    <li key={index} onClick={(e) => classifySection(e, item)}>
+                      <Link>{item}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           ) : (
             <div key={headItem}>{headItem}</div>
           )}

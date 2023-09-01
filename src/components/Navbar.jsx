@@ -39,11 +39,11 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex justify-between items-center gap-4">
-          {/* {user && user.isAdmin && (
+          {user && user.isAdmin && (
             <Link to={'/admin'}>
               <p>Admin</p>
             </Link>
-          )} */}
+          )}
           {/* {user && (
             <Link to={'/class'}>
               <p>나의 강의실</p>
