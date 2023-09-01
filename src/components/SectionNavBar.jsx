@@ -11,22 +11,24 @@ export default function SectionNavBar() {
   };
 
   return (
-    <>
+    <div className='border-b-[1px]'>
       <div
         className={
-          'w-full h-16 flex flex-row justify-start items-center gap-3 ml-2'
+          'max-w-[1200px] mx-auto h-16 flex flex-row justify-start items-center gap-3'
         }
       >
         <div
-          className="btn btn-circle cursor-pointer w-7 h-7 min-h-0 text-white hover:border-gold  bg-gold hover:bg-white hover:text-gold "
+          className="flex rounded-[50px] transition cursor-pointer w-[30px] h-[30px] text-white hover:border-gold bg-[#CFA461] hover:bg-goldHover hover:text-white "
           onClick={() => navigate('/')}
         >
-          <AiFillHome />
+          <AiFillHome className="text-[18px] m-auto mt-[5px]" />
         </div>
         {categorySection.map((section, index) => (
           <div
-            className={`text-gold rounded-3xl text-sm font-bold p-2 cursor-pointer hover:border-gold hover:border ${
-              category === section ? 'bg-gold text-white' : 'bg-white'
+            className={`flex transition leading-7 h-[30px] px-[10px] rounded-3xl text-[14px] cursor-pointer hover:bg-[#CFA461] hover:text-white ${
+              category === section
+                ? 'flex bg-[#CFA461] text-white'
+                : 'text-[#CFA461]'
             }`}
             key={index}
             onClick={() => handleLink(section)}
@@ -35,6 +37,6 @@ export default function SectionNavBar() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
