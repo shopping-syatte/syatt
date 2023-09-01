@@ -95,7 +95,6 @@ export async function removeFromCart(userId, productId) {
   return await remove(ref(database, `carts/${userId}/${productId}`));
 }
 
-
 // 강의 내역 API
 export async function getPayment(userId) {
   return await get(ref(database, `payments/${userId}`))
@@ -105,19 +104,13 @@ export async function getPayment(userId) {
     });
 }
 
-
 export async function addOrUpdateToPayment(userId, product) {
-
   return await set(ref(database, `payments/${userId}/${product.id}`), product);
-
-
-
 }
 
 export async function removeFromPayment(userId, productId) {
   return await remove(ref(database, `payments/${userId}/${productId}`));
 }
-
 
 // 구매 내역 API
 export async function getOrderList(userId) {

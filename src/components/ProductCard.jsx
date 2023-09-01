@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
 
   async function sendCart() {
     const cartData
-      = { id, image, title, price, vimeoId, category, section, quantity: 1 };
+      = { id, image, title, price, vimeoId, category, section, description, quantity: 1 };
     await addOrUpdateItem.mutate(cartData, {
         onSuccess: () => {
           alert('장바구니에 저장하였습니다.');
