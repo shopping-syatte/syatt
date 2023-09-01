@@ -1,6 +1,7 @@
-import { useEffect, useRef, } from 'react';
+import { useEffect, useRef } from 'react';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
+import { getTossKeys } from '../api/firebase.js';
 
 //후에 환경변수로 저장할 것
 const selector = '#payment-widget';
@@ -15,14 +16,18 @@ export function CheckoutPage({ price }) {
 
   useEffect(() => {
     (async () => {
+      const { clientKey, customerKey } = await getTossKeys().then((result) => {
+        console.log(result);
+        return result;
+      });
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         selector,
-        { value: price },
+        { value: price }
       );
       paymentWidgetRef.current = paymentWidget;
       paymentMethodsWidgetRef.current = paymentMethodsWidget;
-      paymentWidget.renderAgreement("#agreement")
+      paymentWidget.renderAgreement('#agreement');
     })();
   }, []);
 
@@ -33,7 +38,7 @@ export function CheckoutPage({ price }) {
     }
     paymentMethodsWidget.updateAmount(
       price,
-      paymentMethodsWidget.UPDATE_REASON.COUPON,
+      paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
 
@@ -46,24 +51,23 @@ export function CheckoutPage({ price }) {
         customerName: '김토스',
         customerEmail: 'customer123@gmail.com',
         successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`
-      })
+        failUrl: `${window.location.origin}/fail`,
+      });
     } catch (error) {
       console.error('결재 실패', error);
-      alert("결재가 취소되거나, 이용약관에 동의 해주세요")
+      alert('결재가 취소되거나, 이용약관에 동의 해주세요');
       // handle error
     }
-
   };
 
   return (
     <>
       <div>
-        <div id='payment-widget' />
-        <div id='agreement' />
-        <button
-          className={'btn btn-primary ml-6'}
-          onClick={handleClick}> 확 인
+        <div id="payment-widget" />
+        <div id="agreement" />
+        <button className={'btn btn-primary ml-6'} onClick={handleClick}>
+          {' '}
+          확 인
         </button>
       </div>
     </>
