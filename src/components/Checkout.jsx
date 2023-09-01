@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
-import { getTossKeys } from '../api/firebase.js';
 
 //후에 환경변수로 저장할 것
 const selector = '#payment-widget';
@@ -16,10 +15,6 @@ export function CheckoutPage({ price }) {
 
   useEffect(() => {
     (async () => {
-      const { clientKey, customerKey } = await getTossKeys().then((result) => {
-        console.log(result);
-        return result;
-      });
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         selector,
@@ -64,7 +59,6 @@ export function CheckoutPage({ price }) {
     <>
       <div>
         <div id="payment-widget" />
-        <div id="agreement" />
         <button className={'btn btn-primary ml-6'} onClick={handleClick}>
           {' '}
           확 인
