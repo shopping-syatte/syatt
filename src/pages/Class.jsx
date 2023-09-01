@@ -5,7 +5,7 @@ import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 import { useEffect, useState } from 'react';
 import { categorySection } from '../Constant/Constants.js';
-// import CheckPayments from '../components/CheckPayments.js';
+import CheckPayments from '../components/CheckPayments.jsx';
 
 export default function Class() {
 
@@ -111,7 +111,7 @@ export default function Class() {
           ))}
       </div>
       <div>
-        {/*<CheckPayments orderId={payment.orderId} />*/}
+          <CheckPayments />
       </div>
     </div>
   );
