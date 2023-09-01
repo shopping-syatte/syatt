@@ -66,6 +66,16 @@ export async function addNewProduct(product, image) {
   });
 }
 
+//제품 정보 수정
+export async function addOrUpdateToProduct(userId, product) {
+  return await set(ref(database, `carts/${userId}/${product.id}`), product);
+}
+
+//제품 등록 삭제
+export async function removeFromProduct(userId, productId) {
+  return await remove(ref(database, `carts/${userId}/${productId}`));
+}
+
 // 제품 리스트
 export async function getProducts() {
   return await get(ref(database, 'products')).then((snapshot) => {
