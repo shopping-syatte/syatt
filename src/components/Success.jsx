@@ -3,6 +3,7 @@ import useCart from '../hooks/useCart.jsx';
 import dayjs from 'dayjs';
 import { DATECHECK } from '../Constant/Constants.js';
 
+
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export function SuccessPage() {
     addOrUpdatePayment,
     removeItem,
   } = useCart();
+
 
   const handleClick = async () => {
     // 결재 후 카트에 저장된 상품을 payment db로 옮기는 작업
@@ -27,6 +29,8 @@ export function SuccessPage() {
         image: product.image,
         title: product.title,
         description: product.description,
+        orderId: searchParams.get('orderId'),
+        amount: searchParams.get('amount'),
         section: product.section,
         vimeoId: product.vimeoId,
         startDate: dayjs(currentDate).format('YYYY-MM-DD'),
@@ -49,6 +53,7 @@ export function SuccessPage() {
     console.log('error');
   }
 
+
   return (
     <>
       <div>
@@ -56,7 +61,7 @@ export function SuccessPage() {
         <div>{`주문 아이디: ${searchParams.get('orderId')}`}</div>
         <div className={'text-[20px]'}>
           {`결제 금액: ${Number(
-            searchParams.get('amount')
+            searchParams.get('amount'),
           ).toLocaleString()}원`}
         </div>
       </div>

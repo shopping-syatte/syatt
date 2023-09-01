@@ -5,6 +5,7 @@ import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 import { useEffect, useState } from 'react';
 import { categorySection } from '../Constant/Constants.js';
+import CheckPayments from '../components/CheckPayments.js';
 
 export default function Class() {
 
@@ -51,14 +52,16 @@ export default function Class() {
     }
   }, [choice, payment]);
 
-  const categoryList = payment && payment.map((item) => item.section);
-
+  const handleCategory = (section) => {
+    setChoice(section)
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (isError) {
     console.error('나의강의실 정보를 가져오는데 실패 하였습니다.');
   }
+
 
   return (
     <div className={'flex flex-col justify-content items-center'}>
@@ -76,34 +79,17 @@ export default function Class() {
           }
         >
           {categorySection.map((section, index) => (
-            <div
-              // className={`text-gold rounded-3xl text-sm font-bold p-2 cursor-pointer hover:border-gold hover:border ${
-              //   category === section ? 'bg-gold text-white' : 'bg-white'
-              // }`}
+            <p
+              onClick={()=> handleCategory(section)}
+              className={`text-gold rounded-3xl text-sm font-bold p-2 cursor-pointer hover:border-gold 
+              hover:border ${ payment.category === section ? 'bg-gold text-white' : 'bg-white'}`}
               key={index}
             >
               #{section}
-            </div>
+            </p>
           ))}
         </div>
-
-        <ul className={'flex justify-start items-center'}>
-          <li
-            className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
-              'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
-            onClick={() => setChoice('all')}>강의전체</li>
-          {categoryList.map((item, index) => (
-            <li
-              className={'border border-solid border-1 border-gray-300 rounded-[30px] ' +
-                'p-1 hover:bg-gold hover:text-white hover:cursor-pointer ml-[10px]'}
-              onClick={() => setChoice(item)}
-              key={index}>{item}</li>
-          ))}
-        </ul>
       </div>
-
-
-
       <div className={'divider mb-[40px]'} />
       <div className={'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[16px]'}>
         {filter &&
@@ -123,6 +109,9 @@ export default function Class() {
               <OrderList item={item} />
             </div>
           ))}
+      </div>
+      <div>
+        {/*<CheckPayments orderId={payment.orderId} />*/}
       </div>
     </div>
   );
