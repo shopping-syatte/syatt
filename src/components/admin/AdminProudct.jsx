@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 AdminProduct.propTypes = {
@@ -15,15 +14,14 @@ AdminProduct.propTypes = {
   }).isRequired,
 };
 
-
 export default function AdminProduct({ product }) {
-  const { image, title, category, price, section, id, description, videoId } = product;
+  const { image, title, category, price, section, id } = product;
 
   const navigate = useNavigate();
 
   const toEdit = () => {
-    navigate(`/productEdit/${id}`, { state: { product } })
-  }
+    navigate(`/productEdit/${id}`, { state: { product } });
+  };
 
   return (
     <li className="flex items-center pb-4 text-center">
@@ -34,11 +32,19 @@ export default function AdminProduct({ product }) {
       <div className="w-32">{category}</div>
       <div className="w-32">{price}</div>
       <div className="w-32">{section}</div>
-      <div className="w-32" onClick={toEdit}>
-        <AiOutlineEdit className="w-7 h-7 mx-auto" />
-      </div>
-      <div className="w-32">
-        <AiOutlineDelete className="w-7 h-7 mx-auto" />
+      <div className="w-32 flex flex-col justify-center items-center">
+        <div
+          className="btn btn-sm bg-white border-gold text-gold hover:bg-blue-400 hover:text-white hover:border-blue-400"
+          onClick={toEdit}
+        >
+          수정
+        </div>
+        <div
+          className="btn btn-sm bg-gold text-white mt-1 hover:bg-white hover:text-red-400 hover:border-red-400"
+          onClick={toEdit}
+        >
+          삭제
+        </div>
       </div>
     </li>
   );

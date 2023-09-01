@@ -13,7 +13,7 @@ export default function Admin() {
 
   return (
     <section>
-      <div>어드민페이지 기본</div>
+      <div>관리자 페이지 입니다.</div>
     </section>
   );
 }

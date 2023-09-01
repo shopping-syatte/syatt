@@ -12,53 +12,54 @@ export default function AdminProductHead() {
     '카테고리',
     '가격',
     '분류',
-    '수정',
-    '삭제',
+    '수정/삭제',
   ];
 
   const categoryList = ['온라인강의', '여성 상의'];
 
   const classifyCategory = (e, item) => {
     e.preventDefault();
-    setCategory(item)
-  }
+    setCategory(item);
+  };
 
   const classifySection = (e, item) => {
     e.preventDefault();
-    setSection(item)
-  }
+    setSection(item);
+  };
 
   return (
     <div className="flex text-center py-2">
       {headList.map((headItem) => (
-        <div className="w-32" key={headItem}>
+        <div className="w-32 font-bold" key={headItem}>
           {headItem === '카테고리' ? (
-            <div className='dropdown'>
+            <div className="dropdown">
               <label tabIndex={0} className="flex items-center cursor-pointer">
-                {headItem}<IoMdArrowDropdown/>
+                {headItem}
+                <IoMdArrowDropdown />
               </label>
               <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40">
-                {categoryList.map((item, index)=>{
-                  return(
+                {categoryList.map((item, index) => {
+                  return (
                     <li key={index} onClick={(e) => classifyCategory(e, item)}>
                       <Link>{item}</Link>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
           ) : headItem === '분류' ? (
-            <div className='dropdown'>
+            <div className="dropdown">
               <label tabIndex={0} className="flex items-center cursor-pointer">
-                {headItem}<IoMdArrowDropdown/>
+                {headItem}
+                <IoMdArrowDropdown />
               </label>
               <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40">
-                {categorySection.map((item, index)=>{
-                  return(
+                {categorySection.map((item, index) => {
+                  return (
                     <li key={index} onClick={(e) => classifySection(e, item)}>
                       <Link>{item}</Link>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>

@@ -18,12 +18,18 @@ export default function AdminProductList() {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   //카테고리와 분류 필터
   const filteredProducts = products
-  ? products.filter(
-      (product) =>
-        (category ? product.category === category : true) &&
-        (section ? product.section === section : true)
-    )
-  : [];
+    ? products
+        .sort((a, b) => {
+          const aNumber = parseInt(a.title.split('.')[0]);
+          const bNumber = parseInt(b.title.split('.')[0]);
+          return aNumber - bNumber;
+        })
+        .filter(
+          (product) =>
+            (category ? product.category === category : true) &&
+            (section ? product.section === section : true)
+        )
+    : [];
   const currentProducts = filteredProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
@@ -42,19 +48,19 @@ export default function AdminProductList() {
   }, [category, section]);
 
   return (
-
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center justify-center ">
       <ul>
         {currentProducts.map((product) => (
           <AdminProduct key={product.id} product={product} />
         ))}
       </ul>
-      <div className="absolute top-[750px]">
+      <div>
         <Pagination
           current={currentPage}
           total={filteredProducts.length}
           pageSize={productsPerPage}
           onChange={handlePageChange}
+          hideOnSinglePage={true}
         />
       </div>
     </div>

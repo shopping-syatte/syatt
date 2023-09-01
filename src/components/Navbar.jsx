@@ -62,8 +62,8 @@ export default function Navbar() {
             {user && user.isAdmin && (
               <Link to={'/admin'}>
                 {/* <BiEditAlt className={'text-xl'} /> */}
-                <div className='flex justify-center items-center bg-gold w-[44px] h-[44px] rounded-full hover:bg-goldHover ease-in-out duration-200 transition-all'>
-                <BiSolidPencil className={'text-[22px] text-white'} />
+                <div className="flex justify-center items-center bg-gold w-[44px] h-[44px] rounded-full hover:bg-goldHover ease-in-out duration-200 transition-all">
+                  <BiSolidPencil className={'text-[22px] text-white'} />
                 </div>
               </Link>
             )}
