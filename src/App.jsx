@@ -19,6 +19,7 @@ import AdminUser from './pages/AdminUser.jsx';
 import AdminSales from './pages/AdminSales.jsx';
 import AdminNewProduct from './pages/AdminNewProduct.jsx'
 import AdminProductEdit from './pages/AdminProductEdit.jsx';
+import './App.css'
 
 function App() {
   return (
