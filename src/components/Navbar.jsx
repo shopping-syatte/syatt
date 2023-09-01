@@ -55,7 +55,7 @@ export default function Navbar() {
             </Link>
           )}
           {user && user.isAdmin && (
-            <Link to={'/admin'}>
+            <Link to={'/newproduct'}>
               <BiEditAlt className={'text-xl'} />
             </Link>
           )}
