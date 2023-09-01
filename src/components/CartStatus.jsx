@@ -23,12 +23,12 @@ export default function CartStatus() {
   return (
     <div
       className={
-        'relative bg-gold p-2 rounded-full border-2 border-gold hover:bg-white ease-in-out duration-200 transition-all'
+        'flex relative justify-center items-center w-[44px] h-[44px] bg-gold rounded-full hover:bg-goldHover duration-200 transition'
       }
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <MdShoppingCart className={'shopping-cart text-2xl text-white'} />
+      <MdShoppingCart className={'flex text-white text-[26px]'} />
       {products && (
         <p
           className={
