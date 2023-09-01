@@ -7,13 +7,13 @@ Products.propTypes = {
 
 export default function Products({products}) {
   return (
-    <>
-      <ul className={'grid grid-cols-1 md:grid-cols-3 gap-4 p-4'}>
+    <div className='flex flex-col max-w-[1200px] mx-auto mt-6 mb-20'>
+      <ul className={'grid grid-cols-3 gap-x-4 mt-8'}>
         {products &&
           products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
       </ul>
-    </>
+    </div>
   );
 }

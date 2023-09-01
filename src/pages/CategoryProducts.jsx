@@ -1,6 +1,7 @@
 import SectionProducts from '../components/SectionProducts.jsx';
 import { useParams } from 'react-router-dom';
 import useProducts from '../hooks/useProducts.jsx';
+import SubTitleBar from '../components/ui/SubTitleBar.jsx';
 
 export default function AllProducts() {
   const {
@@ -18,9 +19,7 @@ export default function AllProducts() {
     <>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
-      <div className="w-full h-[170px] bg-[#FCFCFC] flex justify-center items-center shadow-md">
-        <span className='text-2xl border-gold text-fontColor'>{category}</span>
-      </div>
+      <SubTitleBar title={category}/>
       {products && <SectionProducts products={filteredProducts}/>}
     </>
   );

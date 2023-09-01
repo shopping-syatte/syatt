@@ -36,33 +36,48 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className={'flex flex-col justify-center items-center flex-wrap mb-[20px]'}>
+    <div
+      className={
+        'flex flex-col w-[387] justify-center items-center mb-[50px]'
+      }
+    >
       <div>
         <img
           onClick={handleClick}
-          className='w-[400px] h-56 rounded-lg hover:scale-[1.1] hover:cursor-pointer' src={image} alt={title} />
+          className="w-[387px] h-[220px] rounded-[10px] cursor-pointer transition hover:scale-[0.98]"
+          src={image}
+          alt={title}
+        />
       </div>
-      <div className={'w-[400px] flex flex-col justify-start items-left mt-[5px]'}>
+      <div
+        className={
+          'px-2 w-full flex flex-col justify-start items-left mt-[5px]'
+        }
+      >
         <div className={'flex flex-col justify-center'}>
-          <p className='text-xl font-bold'># {title}</p>
-          <p className='text-gold text-[12px] mt-[5px]'>{description}</p>
+          <p className="text-xl font-bold"># {title}</p>
+          <p className="text-[#969696] text-[12px] font-thin mt-[5px] h-[40px]">
+            {description}
+          </p>
         </div>
-        <div className='flex justify-between mt-[10px]'>
+        <div className="flex justify-between mt-[10px]">
           <div
             onClick={() => sendCart()}
-            className='text-gold font-semibold text-[14px] my-auto rounded-[40px] p-1 border border-yellow-500
-            border-7 hover:bg-gold hover:text-white hover:cursor-pointer'>
+            className="flex transition justify-center w-[110px] h-[30px] text-[#CFA461] text-[14px] my-auto rounded-[40px] pt-[3px] px-2 border-[1px] border-[#CFA461]
+            hover:bg-[#CFA461] hover:text-white hover:cursor-pointer"
+          >
             강의 바로 담기
           </div>
           <div>
-            <span className='text-2xl font-semibold'>{price.toLocaleString('ko-KR', {
-              style: 'currency',
-              currency: 'KRW',
-            })}</span>
+            <span className="text-2xl font-semibold">
+              {price.toLocaleString('ko-KR', {
+                style: 'currency',
+                currency: 'KRW',
+              })}
+            </span>
           </div>
         </div>
       </div>
-
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, } from 'react';
+import { useEffect, useRef } from 'react';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
 
@@ -18,11 +18,11 @@ export function CheckoutPage({ price }) {
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         selector,
-        { value: price },
+        { value: price }
       );
       paymentWidgetRef.current = paymentWidget;
       paymentMethodsWidgetRef.current = paymentMethodsWidget;
-      paymentWidget.renderAgreement("#agreement")
+      paymentWidget.renderAgreement('#agreement');
     })();
   }, []);
 
@@ -33,7 +33,7 @@ export function CheckoutPage({ price }) {
     }
     paymentMethodsWidget.updateAmount(
       price,
-      paymentMethodsWidget.UPDATE_REASON.COUPON,
+      paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
 
@@ -46,24 +46,22 @@ export function CheckoutPage({ price }) {
         customerName: '김토스',
         customerEmail: 'customer123@gmail.com',
         successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`
-      })
+        failUrl: `${window.location.origin}/fail`,
+      });
     } catch (error) {
       console.error('결재 실패', error);
-      alert("결재가 취소되거나, 이용약관에 동의 해주세요")
+      alert('결재가 취소되거나, 이용약관에 동의 해주세요');
       // handle error
     }
-
   };
 
   return (
     <>
       <div>
-        <div id='payment-widget' />
-        <div id='agreement' />
+        <div id="payment-widget" />
         <button
-          className={'btn btn-primary ml-6'}
-          onClick={handleClick}> 확 인
+          className={'flex w-[340px] h-[40px] bg-[#CFA461] rounded-[10px] text-[18px] text-white justify-center items-center mx-auto mt-[60px]'}
+          onClick={handleClick}>결제 진행
         </button>
       </div>
     </>

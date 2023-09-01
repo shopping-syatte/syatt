@@ -1,0 +1,35 @@
+.slick-slider {
+    width: 1200px;
+}
+
+.slick-dots {
+    display: flex;
+    position: absolute;
+    top: 350px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.slick-arrow {
+    width: 5rem;
+    height: 4rem;
+    top: 210px;
+}
+
+.slick-prev {
+    opacity: 0.1;
+    transition: 0.2s;
+}
+.slick-prev:hover {
+    opacity: 0.6;
+}
+
+.slick-next {
+    opacity: 0.1;
+    transition: 0.2s;
+    right: -68px;
+}
+.slick-next:hover {
+    opacity: 0.6;
+}
