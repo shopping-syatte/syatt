@@ -60,8 +60,12 @@ export function CheckoutPage({ price }) {
       <div>
         <div id="payment-widget" />
         <button
-          className={'flex w-[340px] h-[40px] bg-[#CFA461] rounded-[10px] text-[18px] text-white justify-center items-center mx-auto mt-[60px]'}
-          onClick={handleClick}>결제 진행
+          className={
+            'flex w-[340px] h-[40px] bg-[#CFA461] rounded-[10px] text-[18px] text-white justify-center items-center mx-auto mt-[60px]'
+          }
+          onClick={handleClick}
+        >
+          결제 진행
         </button>
       </div>
     </>
