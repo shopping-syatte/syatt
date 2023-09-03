@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addNewProduct, getProducts as fetchProducts } from '../api/firebase.js';
+import { addNewProduct, addOrUpdateToProduct , getProducts as fetchProducts, removeFromProducts } from '../api/firebase.js';
 
 
 export default function useProducts() {
@@ -14,5 +14,22 @@ export default function useProducts() {
     onSuccess: () => queryClient.invalidateQueries(['product']),
   });
 
-  return {productsQuery, addProduct}
+  const updateProduct = useMutation((product) => {
+    return addOrUpdateToProduct(product.id, product);
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['products']);
+    }
+  });
+
+  const removeProduct = useMutation((productId) => {
+    // 여기서 productId를 적절하게 설정하십시오.
+    return removeFromProducts(productId);
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['products']);
+    }
+  });
+
+  return {productsQuery, addProduct, updateProduct, removeProduct}
 }

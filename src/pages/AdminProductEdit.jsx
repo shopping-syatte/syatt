@@ -9,7 +9,7 @@ export default function AdminProductEdit(){
   const [file, setFile] = useState();
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
-  const {addProduct} = useProducts();
+  const {updateProduct} = useProducts();
 
   const {
     state: {
@@ -46,7 +46,7 @@ export default function AdminProductEdit(){
     setIsUploading(true);
     uploadImage(file) // 크라우디너리 업로드와 url 획득
       .then(url => {
-        addProduct.mutate({product, url},{
+        updateProduct.mutate({product, url},{
           onSuccess: () => {
             setSuccess('성공적으로 제품이 추가되었습니다.');
 
