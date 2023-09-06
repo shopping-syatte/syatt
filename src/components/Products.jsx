@@ -13,8 +13,8 @@ export default function Products() {
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {
-        categorySections.map((category)=>(
-          <div key={category}>
+        categorySections.map((category,index)=>(
+          <div key={index}>
             <MainTitleBar title={{category}} />
             <ul className={'grid grid-cols-3 gap-x-4 mt-8'}>
             {products && products.filter((product) => product.section === category.kor)

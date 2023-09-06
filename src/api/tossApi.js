@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const SECRET_KEY = 'test_sk_GjLJoQ1aVZJBpGe5ZEWVw6KYe2RN:';
-const authHeader = `Basic ${btoa(`:${SECRET_KEY}`)}`;
+const authHeader = `Basic ${btoa(`${SECRET_KEY}`)}`;
 
 
 const tossApi = axios.create({

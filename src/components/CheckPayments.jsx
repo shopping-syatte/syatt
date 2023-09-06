@@ -11,15 +11,38 @@ export default function CheckPayments() {
   let paymentId = payment && payment[0].orderId
 
   useEffect(() => {
-    getPaymentList(paymentId).then(response => setPaymentList(response));
+    try {
+      getPaymentList(paymentId).then( res => {
+        setPaymentList(res);
+      })
+    } catch (error) {
+      console.log(error);
+    }
   },[])
+
 
   if(isLoading) return <p>Loading...</p>;
   if(isError) return <p>Error...</p>;
 
   return (
     <div>
-      {paymentList}
+      <div>
+        <p>주문 Id: </p>
+        <p>{paymentList.orderId}</p>
+      </div>
+      <div>
+        <p>페이먼트 키 :</p>
+        <p>{paymentList.paymentKey}</p>
+      </div>
+      <div>
+        <p>주문 상태 :</p>
+        <p>{paymentList.status}</p>
+      </div>
+      <div>
+        <p>주문 상품명 :</p>
+        <p>{paymentList.orderName}</p>
+      </div>
+
     </div>
   );
 }

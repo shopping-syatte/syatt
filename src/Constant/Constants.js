@@ -1,7 +1,7 @@
 
 // 온라인 과목
 export const categorySection = ['기초포페인팅','메탈페인트','메탈플라스터','메탈이펙트'];
-
+export const categorySectionClass = ['전체보기','기초포페인팅','메탈페인트','메탈플라스터','메탈이펙트']
 // 온라인 과목 영문 추가
 export const categorySections = [
   { kor: '기초포페인팅', eng: 'Basic Technique' },

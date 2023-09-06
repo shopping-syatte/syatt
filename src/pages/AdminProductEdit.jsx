@@ -45,11 +45,10 @@ export default function AdminProductEdit(){
     e.preventDefault();
     setIsUploading(true);
     uploadImage(file) // 크라우디너리 업로드와 url 획득
-      .then(url => {
+      .then(url  => {
         addProduct.mutate({product, url},{
           onSuccess: () => {
             setSuccess('성공적으로 제품이 추가되었습니다.');
-
             setTimeout(() => setSuccess(null), 4000);
           }
         });

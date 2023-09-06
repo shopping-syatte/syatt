@@ -4,12 +4,10 @@ import useOrderList from '../hooks/useOrderList.jsx';
 import ClassList from '../components/ClassList.jsx';
 import OrderList from '../components/OrderList.jsx';
 import { useEffect, useState } from 'react';
-import { categorySection } from '../Constant/Constants.js';
-import CheckPayments from '../components/CheckPayments.jsx';
+import { categorySectionClass } from '../Constant/Constants.js';
 
 export default function Class() {
-
-  const [choice, setChoice] = useState('all');
+  const [choice, setChoice] = useState('전체보기');
   const [filter, setFilter] = useState('');
   const {
     paymentQuery: { isLoading, isError, data: payment },
@@ -42,7 +40,7 @@ export default function Class() {
   }, [payment]);
 
   useEffect(() => {
-    if (choice === 'all') {
+    if (choice === '전체보기') {
       setFilter(payment);
     } else {
       const temp =
@@ -53,8 +51,8 @@ export default function Class() {
   }, [choice, payment]);
 
   const handleCategory = (section) => {
-    setChoice(section)
-  }
+    setChoice(section);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -78,11 +76,11 @@ export default function Class() {
             'w-full h-16 flex flex-row justify-start items-center gap-3 ml-2'
           }
         >
-          {categorySection.map((section, index) => (
+          {categorySectionClass.map((section, index) => (
             <p
-              onClick={()=> handleCategory(section)}
+              onClick={() => handleCategory(section)}
               className={`text-gold rounded-3xl text-sm font-bold p-2 cursor-pointer hover:border-gold 
-              hover:border ${ payment.category === section ? 'bg-gold text-white' : 'bg-white'}`}
+              hover:border ${payment.category === section ? 'bg-gold text-white' : 'bg-white'}`}
               key={index}
             >
               #{section}
@@ -109,9 +107,6 @@ export default function Class() {
               <OrderList item={item} />
             </div>
           ))}
-      </div>
-      <div>
-          <CheckPayments />
       </div>
     </div>
   );

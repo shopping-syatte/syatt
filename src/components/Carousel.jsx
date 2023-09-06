@@ -15,7 +15,6 @@ export default function Carousel({ children, slides, color }) {
     return <MdArrowBackIosNew {...props} color={color} />;
   };
 
-  console.log(color);
 
   const settings = {
     dots: true,
